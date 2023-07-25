@@ -1,0 +1,133 @@
+<div class="container" style="max-width: 980px;">
+    <div class="wrapper" id="wrapperFac">
+        <div class="header">
+            <div>
+                <label class="text-name">
+                    {{name}}
+                </label>
+                <label class="text">
+                    {{text}}
+                </label>
+            </div>
+        </div>
+        <div class="wrapperBookingData" *ngIf="this.reserva != null">
+            <div class="row">
+                <div class="col-md-3">
+                    <label class="title">
+                        Codigo de la reserva:
+                    </label>
+                    <label class="data">
+                        {{this.reserva.id}}
+                    </label>
+                </div>
+                <div class="col-md-6">
+                    <label class="title">
+                        Metodo de pago:
+                    </label>
+                    <label class="data">
+                        {{this.reserva.factura.metodoPagoNavigation.metodoPago}}
+                    </label>
+                </div>
+                <div class="col-md-3">
+                    <label class="title">
+                        Numero de personas:
+                    </label>
+                    <label class="data">
+                        {{this.reserva.numeroPersonas}}
+                    </label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <label class="title">
+                        Hotel:
+                    </label>
+                    <label class="data">
+                        Resort Palace Milenium falta
+                    </label>
+                </div>
+                <div class="col-md-6">
+                    <label class="title">
+                        Habitacion:
+                    </label>
+                    <label class="data">
+                        {{this.reserva.habitacionNavigation.habitacion}}
+                    </label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <label class="title">
+                        Tipo habitacion:
+                    </label>
+                    <label class="data">
+                        {{this.reserva.habitacionNavigation.tipoHabitacionNavigation.tipoHabitacion}}
+                    </label>
+                </div>
+                <div class="col-md-4">
+                    <label class="title">
+                        Ciudad:
+                    </label>
+                    <label class="data">
+                        {{this.reserva.habitacionNavigation.hotelNavigation.ciudadNavigation.ciudad}}
+                    </label>
+                </div>
+                <div class="col-md-4">
+                    <label class="title">
+                        Piso:
+                    </label>
+                    <label class="data">
+                        {{this.reserva.habitacionNavigation.piso}}
+                    </label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <label class="title">
+                        Fecha entrada:
+                    </label>
+                    <label class="data">
+                        {{this.reserva.fechaInicio | date: 'YYYY/dd/MM'}}
+                    </label>
+                </div>
+                <div class="col-md-4">
+                    <label class="title">
+                        Fecha salida:
+                    </label>
+                    <label class="data">
+                        {{this.reserva.fechaFin | date: 'YYYY/dd/MM'}}
+                    </label>
+                </div>
+                <div class="col-md-4">
+                    <label class="title">
+                        Total:
+                    </label>
+                    <label class="data">
+                        {{this.reserva.precioFinal | currency: 'COP'}}
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="wrapperTable" *ngIf="this.type == 'download'">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="col-md-12 space"></div>
+                    <app-generic-table [columns]="columns" [dataTable]="dataTable"></app-generic-table>
+                </div>
+            </div>
+            <label class="title">
+                Huespedes
+            </label>
+            <div class="col-md-12" *ngIf="this.dataTable != null">
+                <div class="col-md-12 space"></div>
+                <app-generic-table [columns]="columnsPersons" [dataTable]="this.dataTablePersonas"
+                    [table]="'BookingPersons'"></app-generic-table>
+            </div>
+        </div>
+    </div>
+    <div class="wrapperButton">
+        <div *ngIf="this.type == 'download'">
+            <button mat-raised-button class="red" (click)="DownloadInvoice();">Descargar factura</button>
+        </div>
+    </div>
+</div>

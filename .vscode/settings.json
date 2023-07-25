@@ -1,0 +1,4 @@
+{
+    "appService.defaultWebAppToDeploy": "/subscriptions/e2c1ce90-4a42-41f2-bf0a-9671faf85c1b/resourceGroups/ResourceGroup01/providers/Microsoft.Web/sites/smart-talent-booking",
+    "appService.deploySubpath": "dist\\op.smart-talent.front"
+}

@@ -1,0 +1,47 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="col-md-7 space"></div>
+        <div class="col-md-5 space">
+            <a type="button" style="width: 100%; margin-bottom: 10px;" class="btn btn-dark"
+                href="/hotels/register/0/create">
+                Registrar hotel
+                <i class="fa-solid fa-hotel"></i>
+            </a>
+        </div>
+        <app-generic-table [columns]="columns" [filter]="filter" [table]="table" [options]="options"
+            (selected)="SelectHotel($event)" (dateil)="OpenFormDialog($event, 'view', 1)"
+            (edit)="OpenFormDialog($event, 'edit', 1)"></app-generic-table>
+    </div>
+    <div class="col-md-6" *ngIf="this.seleted != null">
+        <div class="col-md-5 space"></div>
+        <div class="col-md-7 space">
+            <a type="button" style="width: 100%; margin-bottom: 10px;" class="btn btn-dark"
+                [href]="'/hotels/register-room/' + this.seleted + '/0/create'">
+                Registrar habitacion
+                <i class="fa-solid fa-hotel"></i>
+            </a>
+        </div>
+        <app-generic-table [dataTable]="this.dataTable" [columns]="columnsRoom" [options]="optionsRoom"
+            [table]="'Rooms'" (selected)="SelectRoom($event)" (dateil)="OpenFormDialog($event, 'view', 2)"
+            (edit)="OpenFormDialog($event, 'edit', 2)"></app-generic-table>
+    </div>
+    <div class="col-md-6" *ngIf="this.selectedRoom != null">
+        <div class="col-md-5 space"></div>
+        <div class="col-md-7 space">
+            <a type="button" style="width: 100%; margin-bottom: 10px;" class="btn btn-dark"
+                [href]="'/hotels/register-cost/' + this.selectedRoom + '/0/create'">
+                Registrar costo
+                <i class="fa-solid fa-hotel"></i>
+            </a>
+        </div>
+        <app-generic-table [dataTable]="this.dataTableCosts" [columns]="columnsCost" [options]="optionsCost"
+            [table]="'Costs'" (selected)="SelectRoom($event)" (dateil)="OpenFormDialog($event, 'view', 3)"
+            (edit)="OpenFormDialog($event, 'edit', 3)"></app-generic-table>
+    </div>
+    <div class="col-md-12" *ngIf="this.dataTableBookings!= null">
+        <div class="col-md-12 space"></div>
+        <app-generic-table [dataTable]="this.dataTableBookings" [columns]="columnsBookings" [options]="optionsBookings"
+            [table]="'Bookings'" (selected)="SelectRoom($event)" (dateil)="OpenFormDialog($event, 'view', 4)"
+            (edit)="OpenFormDialog($event, 'edit', 4)"></app-generic-table>
+    </div>
+</div>

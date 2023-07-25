@@ -1,0 +1,213 @@
+<div class="container" style="max-width: 980px;">
+    <div style="padding: 11px;">
+        <div class="wrapper">
+            <div class="row">
+                <div class="col-md-12">
+                    <div *ngIf="this.habitacion != null">
+                        <app-card-serach-result [image]="this.habitacion.image" [title]="this.habitacion.habitacion"
+                            [text]="'Habitacion de ' + this.habitacion.tipoHabitacionNavigation.camas + ' camas.'"
+                            [price]="this.habitacion.price"
+                            [tipo]="'Habitación tipo  ' + this.habitacion.tipoHabitacionNavigation.tipoHabitacion + ' con pacidad para ' + this.habitacion.tipoHabitacionNavigation.capacidad"
+                            [city]="this.habitacion.hotelNavigation.ciudadNavigation.ciudad"
+                            [description]="this.habitacion.hotelNavigation.hotel"
+                            [stars]="this.habitacion.hotelNavigation.estrellas"
+                            [room]="this.habitacion.id"></app-card-serach-result>
+                    </div>
+                </div>
+            </div>
+            <mat-divider></mat-divider>
+            <mat-stepper #stepper>
+                <mat-step [stepControl]="firstForm" errorMessage="Todos los campos son requeridos.">
+                    <ng-template matStepLabel>Datos de la reserva.</ng-template>
+                    <form [formGroup]="firstForm" class="row">
+                        <label class="title-filter">Datos de la reserva: </label>
+                        <div class="col-md-4">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Ingrese rango de fechas</mat-label>
+                                <mat-date-range-input [rangePicker]="picker">
+                                    <input [readonly]="true" matStartDate placeholder="Fecha inicial" #fechaInicio
+                                        formControlName="fechaInicio">
+                                    <input [readonly]="true" matEndDate placeholder="Fecha final" #fechaFin
+                                        formControlName="fechaFin">
+                                </mat-date-range-input>
+                                <mat-datepicker-toggle [disabled]="true" matIconSuffix
+                                    [for]="picker"></mat-datepicker-toggle>
+                                <mat-date-range-picker #picker></mat-date-range-picker>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-2">
+                            <mat-form-field class="example-full-width" appearance="outline">
+                                <mat-label>Dias:</mat-label>
+                                <input [readonly]="true" type="number" matInput #dias placeholder="dias"
+                                    formControlName="dias">
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-2">
+                            <mat-form-field class="example-full-width" appearance="outline">
+                                <mat-label>Personas:</mat-label>
+                                <input [readonly]="true" type="number" matInput #personas placeholder="personas"
+                                    formControlName="personas">
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-4">
+                            <mat-form-field class="example-full-width" appearance="outline">
+                                <mat-label>Precio total:</mat-label>
+                                <input [readonly]="true" type="number" matInput #precio placeholder="precio"
+                                    formControlName="precio">
+                            </mat-form-field>
+                        </div>
+                        <div>
+                            <button mat-button matStepperPrevious (click)="Cancel();">Salir</button>
+                            <button mat-button matStepperNext>Siguiente</button>
+                        </div>
+                    </form>
+                </mat-step>
+                <mat-step [stepControl]="secondForm" errorMessage="Debe rellenar los campos requeridos.">
+                    <ng-template matStepLabel>Huespedes.</ng-template>
+                    <form [formGroup]="secondForm" class="row">
+                        <label class="title-filter">Datos de los huespedes: </label>
+                        <div class="col-md-4">
+                            <mat-form-field class="example-full-width" appearance="outline">
+                                <mat-label>Nombres:</mat-label>
+                                <input matInput #nombres placeholder="nombres" formControlName="nombres">
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-4">
+                            <mat-form-field class="example-full-width" appearance="outline">
+                                <mat-label>Apellidos:</mat-label>
+                                <input matInput #apellidos placeholder="apellidos" formControlName="apellidos">
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-4">
+                            <mat-form-field class="example-full-width" appearance="outline">
+                                <mat-label>Fecha nacimiento:</mat-label>
+                                <input matInput type="date" #fechaNacimiento placeholder="Fecha nacimiento"
+                                    formControlName="fechaNacimiento">
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-4">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Genero: </mat-label>
+                                <mat-select id="genero" #genero formControlName="genero" required>
+                                    <mat-option [value]="gender.id" *ngFor="let gender of genders; let i = index">
+                                        {{gender.genero}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-4">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Tipo documento: </mat-label>
+                                <mat-select id="tipoDocumento" #tipoDocumento formControlName="tipoDocumento" required>
+                                    <mat-option [value]="documentType.id"
+                                        *ngFor="let documentType of documentTypes; let i = index">
+                                        {{documentType.codigo}} - {{documentType.tipoDocumento}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-4">
+                            <mat-form-field class="example-full-width" appearance="outline">
+                                <mat-label>Numero de documento:</mat-label>
+                                <input matInput #numeroDocumento placeholder="Numero de documento"
+                                    formControlName="numeroDocumento">
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-8">
+                            <mat-form-field class="example-full-width" appearance="outline">
+                                <mat-label>Email:</mat-label>
+                                <input matInput type="email" #email placeholder="email" formControlName="email" [email]="true">
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-4">
+                            <mat-form-field class="example-full-width" appearance="outline">
+                                <mat-label>Telefono de contacto:</mat-label>
+                                <input matInput type="number" #telefonoContacto placeholder="Telefono de contacto"
+                                    formControlName="telefonoContacto">
+                            </mat-form-field>
+                        </div>
+                        <div *ngIf="this.countGuest != this.firstForm.value.personas">
+                            <button mat-raised-button
+                                style="color:white; background: #eb1b33; width: 100%; height: 51px;" id="buscar-button"
+                                [disabled]="this.secondForm.invalid || this.countGuest == this.firstForm.value.personas"
+                                (click)="SaveGuest()">Agregar huesped</button>
+                        </div>
+                        <div *ngIf="this.countGuest == this.firstForm.value.personas">
+                            <label class="title-filter">Se han agregado los {{this.countGuest}} huespedes a la reserva.
+                            </label>
+                        </div>
+                        <div>
+                            <button mat-button matStepperPrevious>Regresar</button>
+                            <button mat-button matStepperNext
+                                [disabled]="this.countGuest != this.firstForm.value.personas">Siguiente</button>
+                        </div>
+                    </form>
+                </mat-step>
+                <mat-step [stepControl]="thirdForm" errorMessage="Debe rellenar los campos requeridos.">
+                    <ng-template matStepLabel>Datos de contacto de emergencia.</ng-template>
+                    <form [formGroup]="thirdForm" class="row">
+                        <label class="title-filter">Datos de contacto de emergencia: </label>
+                        <div class="col-md-6">
+                            <mat-form-field class="example-full-width" appearance="outline">
+                                <mat-label>Nombres:</mat-label>
+                                <input matInput #nombres placeholder="nombres" formControlName="nombres" required>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-6">
+                            <mat-form-field class="example-full-width" appearance="outline">
+                                <mat-label>Apellidos:</mat-label>
+                                <input matInput #apellidos placeholder="apellidos" formControlName="apellidos" required>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-6">
+                            <mat-form-field class="example-full-width" appearance="outline">
+                                <mat-label>Numero de contacto:</mat-label>
+                                <input matInput #numeroContacto placeholder="numeroContacto"
+                                    formControlName="numeroContacto" required type="number">
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-6">
+                            <mat-form-field class="example-full-width" appearance="outline">
+                                <mat-label>Email:</mat-label>
+                                <input matInput #email placeholder="email" formControlName="email">
+                            </mat-form-field>
+                        </div>
+                        <div>
+                            <button mat-button matStepperPrevious>Regresar</button>
+                            <button mat-button matStepperNext>Siguiente</button>
+                        </div>
+                    </form>
+                </mat-step>
+                <mat-step [stepControl]="fourthForm" errorMessage="Debe elegir un metodo de pago.">
+                    <ng-template matStepLabel>Datos de pago.</ng-template>
+                    <form [formGroup]="fourthForm" class="row">
+                        <label class="title-filter">Metodo de pago: </label>
+                        <mat-radio-group aria-labelledby="example-radio-group-label" class="example-radio-group"
+                            formControlName="metodoPago" #metodoPago required>
+                            <mat-radio-button class="example-radio-button" *ngFor="let metodoPago of this.metodosPago"
+                                [value]="metodoPago.id"> {{metodoPago.metodoPago}}
+                            </mat-radio-button>
+                        </mat-radio-group>
+                        <div>
+                            <button mat-button matStepperPrevious>Regresar</button>
+                            <button mat-button matStepperPrevious [disabled]="this.fourthForm.invalid || this.thirdForm.invalid || this.countGuest != this.firstForm.value.personas
+                                || this.firstForm.invalid" (click)="CreateReservation();">Registrar reserva</button>
+                            <!-- <button mat-button matStepperNext>Siguiente</button> -->
+                        </div>
+                    </form>
+                </mat-step>
+                <!-- <mat-step>
+                    <ng-template matStepLabel>Hecho</ng-template>
+                    <p>Dale en registrar si ya ingresates todos los datos solicitados.</p>
+                    <div>
+                        <button mat-button matStepperPrevious>Regresar</button>
+                        <button mat-button matStepperPrevious
+                            [disabled]="this.secondForm.invalid || this.firstForm.invalid"
+                            (click)="CreateReservation();">Registrar reserva</button>
+                    </div>
+                </mat-step> -->
+            </mat-stepper>
+
+        </div>
+    </div>
+</div>

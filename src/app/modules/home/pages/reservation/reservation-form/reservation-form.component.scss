@@ -1,0 +1,75 @@
+.wrapper {
+    background: white;
+    height: auto;
+    min-height: 150px;
+    width: 100%;
+    border-radius: 0px 0px 6px 6px;
+    box-shadow: 0px 2px rgb(0, 0, 0, 0.2);
+}
+.header {
+    background-image: url("./../../../../../../assets/images/destinations/header.jpeg");
+    height: 30vh;
+    width: 100%;
+    float: left;
+    /* border-radius: 4px; */
+    box-shadow: 0px 2px rgb(0, 0, 0, 0.2);
+    background-size: cover;
+    margin: 0px 0px 16px 0px;
+}
+
+.header .text-name {
+    font-size: 24px;
+    vertical-align: top;
+    color: white;
+    width: 100%;
+    line-height: 1;
+    padding-left: 32px;
+    padding-top: 86px;
+}
+.header .text {
+    font-size: 32px;
+    vertical-align: top;
+    font-weight: bold;
+    color: white;
+    width: auto;
+    line-height: 1;
+    padding-left: 32px;
+    padding-top: 9px;
+    padding-right: 0;
+}
+.wrapperBookingData {
+    padding: 20px 20px 30px 20px;
+}
+.title {
+    padding-bottom: 5px;
+    font-size: 13px;
+    vertical-align: top;
+    font-weight: 500;
+    color: #939393;
+    width: 100%;
+    text-align: center;
+}
+.wrapperBookingData .data {
+    font-size: 22px;
+    vertical-align: top;
+    font-weight: normal;
+    color: #1b1b1b;
+    width: 100%;
+    text-align: center;
+    line-height: 106%;
+}
+.wrapperBookingData .row {
+    margin-bottom: 40px;
+}
+.wrapperButton .red {
+    color: white;
+    background: #eb1b33;
+    width: 100%;
+    height: 51px;
+    margin: 18px 0px 23px 0px;
+}
+@media screen and (max-width: 710px) {
+    .header .text-name {
+        padding-top: 38px;
+    }
+}
