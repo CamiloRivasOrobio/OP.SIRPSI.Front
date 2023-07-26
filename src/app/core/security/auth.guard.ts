@@ -16,7 +16,8 @@ export class AuthGuard implements CanActivate {
 
   canActivate(route: ActivatedRouteSnapshot): boolean {
     if (this.accountService.userData) {
-      if (
+      if (route.routeConfig?.path == 'dashboard') return true;
+      else if (
         this.accountService.userData.rutasAsignadas.filter(
           (ruta: any) => ruta.ruta == route.routeConfig?.path
         ).length > 0

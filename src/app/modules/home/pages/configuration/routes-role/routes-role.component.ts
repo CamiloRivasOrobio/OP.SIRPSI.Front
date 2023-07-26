@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { AccountService } from 'src/app/shared/services/account.service';
 import { GenericService } from 'src/app/shared/services/generic.service';
@@ -13,13 +14,13 @@ import { LoadingService } from 'src/app/shared/services/loading.service';
 export class RoutesRoleComponent {
   id: string | undefined;
   public rolesList: any;
-  public routesList: any;
   constructor(
     public genericService: GenericService,
     private router: Router,
     private accountService: AccountService,
     private loadingService: LoadingService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private snackBar: MatSnackBar
   ) {}
 
   ngOnInit(): void {
@@ -31,28 +32,34 @@ export class RoutesRoleComponent {
       .GetAll('roles/ConsultarRoles')
       .subscribe((data: any) => {
         this.rolesList = data;
-        this.genericService
-          .GetAll('modulos/ConsultarModulos')
-          .subscribe((data: any) => {
-            this.routesList = data;
-            setTimeout(
-              () => this.loadingService.ChangeStatusLoading(false),
-              500
-            );
-          });
+        setTimeout(() => this.loadingService.ChangeStatusLoading(false), 10);
       });
   }
   SelectedItem(role: string, modulo: string, event: any) {
-    if (event.checked) {
-      let body = {
-        RoleId: role,
-        ModuloId: modulo,
-      };
-      this.genericService
-        .Post('modulosUserRole/RegistrarModulosRole', body)
-        .subscribe((data: any) => {
-          console.log(data);
-        });
-    }
+    this.loadingService.ChangeStatusLoading(true);
+    let body = {
+      RoleId: role,
+      ModuloId: modulo,
+    };
+    this.genericService
+      .Post(
+        'modulosUserRole/' +
+          (event.checked ? 'RegistrarModulosRole' : 'EliminarModulosRole'),
+        body
+      )
+      .subscribe((data: any) => {
+        setTimeout(() => this.loadingService.ChangeStatusLoading(false), 500);
+        this.openSnackBar(
+          event.checked
+            ? 'Se ha asignado correctamente'
+            : 'Se ha desasignado correctamente'
+        );
+      });
+  }
+  openSnackBar(message: string) {
+    this.snackBar.open(message, 'x', {
+      horizontalPosition: 'start',
+      verticalPosition: 'bottom',
+    });
   }
 }

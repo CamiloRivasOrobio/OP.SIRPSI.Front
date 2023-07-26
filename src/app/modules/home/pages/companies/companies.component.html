@@ -1,1 +1,40 @@
-<p>companies works!</p>
+<div class="container" style="max-width: 1520px;">
+    <div class="row">
+        <div class="col-md-7 space">
+            <label class="title">Lista de empresas</label>
+        </div>
+        <div class="col-md-5 space">
+            <a type="button" style="width: 100%; margin-bottom: 10px;" class="btn btn-dark"
+                (click)="openFormDialogUser()">
+                Registrar empresa
+                <i class="fa-solid fa-tower-control"></i>
+            </a>
+        </div>
+        <div class="col-md-12">
+            <div class="col-md-12 space"></div>
+            <app-generic-table [columns]="columns" [table]="table" [options]="options" (dateil)="OpenFormDialog($event)"
+                (selected)="SelectReservation($event)" (assign)="onAssignAdmin($event, 0)"></app-generic-table>
+        </div>
+    </div>
+    <div class="row mt-4" *ngIf="this.dataTable != null">
+        <div class="col-md-7 space">
+            <label class="title">Lista de centros de trabajo de la empresa: {{this.nameEmpresa.nombre}}</label>
+        </div>
+        <div class="col-md-5 space">
+            <a type="button" style="width: 100%; margin-bottom: 10px;" class="btn btn-dark"
+                (click)="OpenFormDialog(this.nameEmpresa.id)">
+                Registrar centro de trabajo
+                <i class="fa-solid fa-tower-control"></i>
+            </a>
+        </div>
+        <div class="col-md-12">
+            <div class="col-md-12 space"></div>
+            <div class="col-md-12">
+                <div class="col-md-12 space"></div>
+                <app-generic-table [columns]="columnsWork" [options]="optionsWork" [dataTable]="this.dataTable"
+                    [table]="'centrotrabajo/ConsultarCentroDeTrabajo'"
+                    (assign)="onAssignAdmin($event, 1)"></app-generic-table>
+            </div>
+        </div>
+    </div>
+</div>

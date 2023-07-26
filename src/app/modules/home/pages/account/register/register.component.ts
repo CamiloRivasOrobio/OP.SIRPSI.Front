@@ -26,7 +26,7 @@ export class RegisterComponent implements OnInit {
       usuario: ['', Validators.required],
       contrasena: ['', Validators.required],
       confirmarContrasena: ['', Validators.required],
-      role: [environment.clientRole, Validators.required],
+      // role: [environment.clientRole, Validators.required],
       apellidos: ['', Validators.required],
       nombres: ['', Validators.required],
       fechaNacimiento: ['', Validators.required],

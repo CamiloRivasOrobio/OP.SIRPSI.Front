@@ -1,1 +1,16 @@
-<p>work-centers works!</p>
+<div class="container" style="max-width: 1520px;">
+    <div class="row">
+        <div class="col-md-12 space">
+            <label class="title">Lista de centros de trabajo del usuario: {{this.accountService.userData.user.names}}
+                {{this.accountService.userData.user.surnames}}</label>
+        </div>
+        <div class="col-md-12">
+            <div class="col-md-12 space"></div>
+            <div class="col-md-12">
+                <div class="col-md-12 space"></div>
+                <app-generic-table [columns]="columnsWork" [options]="optionsWork" [table]="table"
+                    (assign)="onAssignAdmin($event, 2)" [filter]="filter"></app-generic-table>
+            </div>
+        </div>
+    </div>
+</div>

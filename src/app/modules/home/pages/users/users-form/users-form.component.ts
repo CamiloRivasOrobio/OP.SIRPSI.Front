@@ -5,6 +5,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { GenericService } from 'src/app/shared/services/generic.service';
 import { LoadingService } from 'src/app/shared/services/loading.service';
 import Swal from 'sweetalert2';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-users-form',
@@ -68,10 +69,13 @@ export class UsersFormComponent implements OnInit {
         }).then(() => window.location.reload());
       },
       error: (error) => {
-        console.log('error usuario' + error.error.message);
         Swal.fire({
           icon: 'warning',
-          title: 'Ha ocurrido un error! ' + error.error.message,
+          title:
+            'Ha ocurrido un error! ' + error.error.message ==
+            'Registro de usuario ¡fallido!  Failed : PasswordRequiresNonAlphanumeric,PasswordRequiresLower,PasswordRequiresUpper'
+              ? 'Registro de usuario ¡fallido!  Error: La contraseña no cumple los criterios de seguridad.'
+              : error.error.message,
           showConfirmButton: false,
           timer: 1300,
         });
@@ -104,7 +108,16 @@ export class UsersFormComponent implements OnInit {
                         this.genericService
                           .GetAll('usuario/ConsultarUsuarios')
                           .subscribe((data: any) => {
-                            this.listUsuario = data;
+                            console.log(data);
+                            this.listUsuario = data.filter(
+                              (data: any) =>
+                                data.idRol ==
+                                (this.data.table == 0
+                                  ? environment.adminitradorEmpRole
+                                  : this.data.table == 1
+                                  ? environment.psicologoRole
+                                  : environment.trabajadorRole)
+                            );
                             setTimeout(
                               () =>
                                 this.loadingService.ChangeStatusLoading(false),
@@ -126,34 +139,52 @@ export class UsersFormComponent implements OnInit {
       .subscribe();
   }
   onUpdateEmpresa() {
-    // if (this.table == 0) {
-    //   var empresa = this.data.item;
-    //   empresa.IdUsuario = this.formEmpresa.value.Usuario;
-    //   this._empresas.updateEmpresa(empresa).subscribe({
-    //     next: (data) => {
-    //       window.location.reload();
-    //       this.toastr.success('Usuario asignado exitosamente!');
-    //     },
-    //     error: (error) => {
-    //       console.log('error usuario' + error.error.message);
-    //       this.toastr.error('Ha ocurrido un error! ' + error.error.message);
-    //     },
-    //   });
-    // } else {
-    //   var centroTrabajo = this.data.item;
-    //   centroTrabajo.IdUsuario = this.formEmpresa.value.Usuario;
-    //   console.log(this.data.item);
-    //   console.log(this.formEmpresa.value.Usuario);
-    //   this._centroTrabajo.updateCentroTrabajo(centroTrabajo).subscribe({
-    //     next: (data) => {
-    //       window.location.reload();
-    //       this.toastr.success('Usuario asignado exitosamente!');
-    //     },
-    //     error: (error) => {
-    //       console.log('error usuario' + error.error.message);
-    //       this.toastr.error('Ha ocurrido un error! ' + error.error.message);
-    //     },
-    //   });
-    // }
+    if (this.table == 0) {
+      var empresa = this.data.item;
+      empresa.IdUsuario = this.formEmpresa.value.Usuario;
+      this.genericService.Put('empresas/ActualizarEmpresa', empresa).subscribe({
+        next: (data) => {
+          this.dialogRef.close();
+          Swal.fire({
+            icon: 'success',
+            title: 'Usuario asignado exitosamente.',
+            showConfirmButton: false,
+            timer: 1300,
+          }).then(() => window.location.reload());
+        },
+        error: (error) => {
+          Swal.fire({
+            icon: 'warning',
+            title: 'Ha ocurrido un error! ' + error.error.message,
+            showConfirmButton: false,
+            timer: 1300,
+          });
+        },
+      });
+    } else {
+      var centroTrabajo = this.data.item;
+      centroTrabajo.IdUsuario = this.formEmpresa.value.Usuario;
+      this.genericService
+        .Put('centrotrabajo/ActualizarCentroDeTrabajo', centroTrabajo)
+        .subscribe({
+          next: (data) => {
+            this.dialogRef.close();
+            Swal.fire({
+              icon: 'success',
+              title: 'Usuario asignado exitosamente.',
+              showConfirmButton: false,
+              timer: 1300,
+            }).then(() => window.location.reload());
+          },
+          error: (error) => {
+            Swal.fire({
+              icon: 'warning',
+              title: 'Ha ocurrido un error! ' + error.error.message,
+              showConfirmButton: false,
+              timer: 1300,
+            });
+          },
+        });
+    }
   }
 }

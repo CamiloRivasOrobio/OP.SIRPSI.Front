@@ -21,7 +21,7 @@ const routes: Routes = [
       import('./modules/home/pages/dashboard/dashboard.module').then(
         (m) => m.DashboardModule
       ),
-    // canActivate: [AuthGuard],
+    canActivate: [AuthGuard],
   },
   {
     path: 'users',
