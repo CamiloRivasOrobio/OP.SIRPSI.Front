@@ -6,6 +6,7 @@ import { GenericService } from 'src/app/shared/services/generic.service';
 import { LoadingService } from 'src/app/shared/services/loading.service';
 import Swal from 'sweetalert2';
 import { environment } from 'src/environments/environment';
+import { UsersFormComponent } from '../../users/users-form/users-form.component';
 
 @Component({
   selector: 'app-companies-form',
@@ -119,7 +120,7 @@ export class CompaniesFormComponent implements OnInit {
   changeViewFormUser() {
     this.dialogRef.close();
     this.dialog
-      .open(CompaniesFormComponent, { data: { id: 0, type: 0, reload: false } })
+      .open(UsersFormComponent, { data: { id: 0, type: 0, reload: false } })
       .afterClosed()
       .subscribe();
   }
