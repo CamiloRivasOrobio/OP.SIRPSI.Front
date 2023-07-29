@@ -48,7 +48,7 @@ export class CompaniesFormComponent implements OnInit {
     });
   }
   onSave() {
-    this.genericService.Post('user/RegisterUser', this.form.value).subscribe({
+    this.genericService.Post('empresas/RegistrarEmpresa.', this.form.value).subscribe({
       next: (data) => {
         if (this.data.reload) '';
         else this.dialogRef.close();
