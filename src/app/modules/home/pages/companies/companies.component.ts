@@ -6,6 +6,7 @@ import { GenericService } from 'src/app/shared/services/generic.service';
 import { LoadingService } from 'src/app/shared/services/loading.service';
 import { UsersFormComponent } from '../users/users-form/users-form.component';
 import { AssignWorkCentersFormComponent } from '../work-centers/assign-work-centers-form/assign-work-centers-form.component';
+import { CompaniesFormComponent } from './companies-form/companies-form.component';
 
 @Component({
   selector: 'app-companies',
@@ -99,9 +100,9 @@ export class CompaniesComponent implements OnInit {
       });
   }
   openFormDialogUser() {
-    // const dialogRef = this.dialog.open(UsersFormComponent, {
-    //   data: { id: this.id, type: 0, reload: true },
-    // });
-    // dialogRef.afterClosed().subscribe();
+    const dialogRef = this.dialog.open(CompaniesFormComponent, {
+      data: { id: this.id, type: 0, reload: true },
+    });
+    dialogRef.afterClosed().subscribe();
   }
 }

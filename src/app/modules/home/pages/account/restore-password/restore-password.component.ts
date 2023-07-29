@@ -35,8 +35,9 @@ export class RestorePasswordComponent implements OnInit {
         setTimeout(() => this.loadingService.ChangeStatusLoading(false), 800);
       },
       (error) => {
+        console.error(error.error);
         console.error(error);
-        this.openSnackBar(error.error.Message);
+        this.openSnackBar(error.error.message);
         setTimeout(() => this.loadingService.ChangeStatusLoading(false), 800);
       }
     );

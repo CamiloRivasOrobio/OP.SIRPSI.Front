@@ -115,6 +115,13 @@ div.navbar-menu nav.nav-menu p.copyrignt {
   margin: 1rem 0;
 }
 
+li.item-menu ul.children {
+  display: none;
+}
+li.item-menu:hover > ul.children {
+  display: block;
+}
+
 li.item-menu ul.children li a.item-sub-menu {
   display: block;
   padding: 0.8rem;

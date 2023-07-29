@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AccountService } from 'src/app/shared/services/account.service';
 import { LoadingService } from 'src/app/shared/services/loading.service';
 import Swal from 'sweetalert2';
+import { TermsConditionsComponent } from '../../../components/terms-conditions/terms-conditions.component';
 
 @Component({
   selector: 'app-login',
@@ -17,7 +19,8 @@ export class LoginComponent implements OnInit {
     public formBuilder: FormBuilder,
     public accountService: AccountService,
     private snackBar: MatSnackBar,
-    private loadingService: LoadingService
+    private loadingService: LoadingService,
+    public dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -25,29 +28,43 @@ export class LoginComponent implements OnInit {
       IdCompany: ['346789', Validators.required],
       Document: ['1234567', Validators.required],
       Password: ['Admin123*.', Validators.required],
-      Tc: ['', Validators.required],
+      Tc: [false, Validators.required],
     });
     this.accountService.ValidateSesion();
     setTimeout(() => this.loadingService.ChangeStatusLoading(false), 800);
   }
   GetInto() {
-    this.loadingService.ChangeStatusLoading(true);
-    this.accountService.Authenticate(this.form.value).subscribe(
-      (result: any) => {
-        setTimeout(() => this.loadingService.ChangeStatusLoading(false), 800);
-      },
-      (error) => {
-        console.log(error.error);
-        Swal.fire('Error', error.error.message, 'error');
-        this.openSnackBar(error.error.message);
-        setTimeout(() => this.loadingService.ChangeStatusLoading(false), 800);
-      }
-    );
+    if (this.form.valid && this.form.value.Tc == true) {
+      this.loadingService.ChangeStatusLoading(true);
+      this.accountService.Authenticate(this.form.value).subscribe(
+        (result: any) => {
+          setTimeout(() => this.loadingService.ChangeStatusLoading(false), 800);
+        },
+        (error) => {
+          console.log(error.error);
+          Swal.fire('Error', error.error.message, 'error');
+          this.openSnackBar(error.error.message);
+          setTimeout(() => this.loadingService.ChangeStatusLoading(false), 800);
+        }
+      );
+    } else {
+      Swal.fire(
+        'Cuidado',
+        'Por favor aceptar los terminos y condiciones.',
+        'warning'
+      );
+    }
   }
   openSnackBar(message: string) {
     this.snackBar.open(message, 'x', {
       horizontalPosition: 'start',
       verticalPosition: 'bottom',
     });
+  }
+  OpenTermsConditions() {
+    const dialogRef = this.dialog.open(TermsConditionsComponent, {
+      data: { id: 0, type: 1 },
+    });
+    dialogRef.afterClosed().subscribe();
   }
 }

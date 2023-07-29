@@ -14,9 +14,10 @@ import { HttpClientModule } from '@angular/common/http';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatNativeDateModule } from '@angular/material/core';
+import { CompaniesFormComponent } from './companies-form/companies-form.component';
 
 @NgModule({
-  declarations: [CompaniesComponent],
+  declarations: [CompaniesComponent, CompaniesFormComponent],
   imports: [
     CommonModule,
     CompaniesRoutingModule,

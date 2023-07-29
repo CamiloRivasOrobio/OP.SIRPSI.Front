@@ -22,7 +22,9 @@
                 </button>
             </mat-form-field>
             <div style="width: 100%; float: left; padding: 0px 0px 15px 0px;">
-                <mat-checkbox #Tc formControlName="Tc">Acepto lo terminos y condiciones</mat-checkbox>
+                <mat-checkbox #Tc formControlName="Tc"></mat-checkbox><a (click)="OpenTermsConditions();"
+                    class="item-blue" style="cursor: pointer;">Acepto lo
+                    terminos y condiciones</a>
             </div>
             <div>
                 <button mat-raised-button style="color:white; background: #1b87eb; width: 100%; height: 51px;"

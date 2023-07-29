@@ -14,6 +14,7 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import { RestorePasswordComponent } from './restore-password/restore-password.component';
 import { SelectRoleComponent } from './select-role/select-role.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
+import { TermsConditionsModule } from '../../components/terms-conditions/terms-conditions.module';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
     MatSnackBarModule,
     MatIconModule,
     MatDividerModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    TermsConditionsModule
   ]
 })
 export class AccountModule { }
