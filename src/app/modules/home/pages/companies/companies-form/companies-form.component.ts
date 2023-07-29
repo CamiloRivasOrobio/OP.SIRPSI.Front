@@ -35,43 +35,45 @@ export class CompaniesFormComponent implements OnInit {
   ngOnInit(): void {
     this.getListas();
     this.form = this.formBuilder.group({
-      TipoDocumento: '',
+      TipoDocumento: ['', Validators.required],
       DigitoVerificacion: '',
-      IdTipoEmpresa: '',
+      IdTipoEmpresa: ['', Validators.required],
       Documento: ['', Validators.required],
       Nombre: ['', Validators.required],
       Descripcion: ['', Validators.required],
       Observacion: '',
       IdMinisterio: ['', Validators.required],
-      IdEstado: '',
+      IdEstado: ['', Validators.required],
       IdUsuario: '',
     });
   }
   onSave() {
-    this.genericService.Post('empresas/RegistrarEmpresa.', this.form.value).subscribe({
-      next: (data) => {
-        if (this.data.reload) '';
-        else this.dialogRef.close();
-        Swal.fire({
-          icon: 'success',
-          title: 'Usuario Registrado, exitosamente.',
-          showConfirmButton: false,
-          timer: 1300,
-        }).then(() => window.location.reload());
-      },
-      error: (error) => {
-        Swal.fire({
-          icon: 'warning',
-          title:
-            'Ha ocurrido un error! ' + error.error.message ==
-            'Registro de usuario ¡fallido!  Failed : PasswordRequiresNonAlphanumeric,PasswordRequiresLower,PasswordRequiresUpper'
-              ? 'Registro de usuario ¡fallido!  Error: La contraseña no cumple los criterios de seguridad.'
-              : error.error.message,
-          showConfirmButton: false,
-          timer: 1300,
-        });
-      },
-    });
+    this.genericService
+      .Post('empresas/RegistrarEmpresa', this.form.value)
+      .subscribe({
+        next: (data) => {
+          if (this.data.reload) '';
+          else this.dialogRef.close();
+          Swal.fire({
+            icon: 'success',
+            title: 'Empresa, Registrado, exitosamente.',
+            showConfirmButton: false,
+            timer: 1300,
+          }).then(() => window.location.reload());
+        },
+        error: (error) => {
+          Swal.fire({
+            icon: 'warning',
+            title:
+              'Ha ocurrido un error! ' + error.error.message ==
+              'Registro de usuario ¡fallido!  Failed : PasswordRequiresNonAlphanumeric,PasswordRequiresLower,PasswordRequiresUpper'
+                ? 'Registro de usuario ¡fallido!  Error: La contraseña no cumple los criterios de seguridad.'
+                : error.error.message,
+            showConfirmButton: false,
+            timer: 1300,
+          });
+        },
+      });
   }
 
   getListas() {
@@ -89,22 +91,26 @@ export class CompaniesFormComponent implements OnInit {
               .subscribe((data: any) => {
                 this.listTipoEmpresa = data;
                 this.genericService
-                  .GetAll('usuario/ConsultarUsuarios')
+                  .GetAll('estados/ConsultarEstados')
                   .subscribe((data: any) => {
-                    console.log(data);
-                    this.listUsuario = data.filter(
-                      (data: any) =>
-                        data.idRol ==
-                        (this.data.table == 0
-                          ? environment.adminitradorEmpRole
-                          : this.data.table == 1
-                          ? environment.psicologoRole
-                          : environment.trabajadorRole)
-                    );
-                    setTimeout(
-                      () => this.loadingService.ChangeStatusLoading(false),
-                      500
-                    );
+                    this.estadosList = data;
+                    this.genericService
+                      .GetAll('usuario/ConsultarUsuarios')
+                      .subscribe((data: any) => {
+                        this.listUsuario = data.filter(
+                          (data: any) =>
+                            data.idRol ==
+                            (this.data.table == 0
+                              ? environment.adminitradorEmpRole
+                              : this.data.table == 1
+                              ? environment.psicologoRole
+                              : environment.trabajadorRole)
+                        );
+                        setTimeout(
+                          () => this.loadingService.ChangeStatusLoading(false),
+                          500
+                        );
+                      });
                   });
               });
           });
