@@ -4,11 +4,13 @@ import { AuthGuard } from 'src/app/core/security/auth.guard';
 import { RoutesComponent } from './routes/routes.component';
 import { RolesComponent } from './roles/roles.component';
 import { RoutesRoleComponent } from './routes-role/routes-role.component';
+import { ConfigurationVariablesComponent } from './configuration-variables/configuration-variables.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'routes', pathMatch: 'full' },
   { path: 'roles', component: RolesComponent, canActivate: [AuthGuard] },
   { path: 'routes', component: RoutesComponent, canActivate: [AuthGuard] },
+  { path: 'variables', component: ConfigurationVariablesComponent },
   {
     path: 'routes-role',
     component: RoutesRoleComponent,

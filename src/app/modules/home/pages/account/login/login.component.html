@@ -21,6 +21,11 @@
                     <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
                 </button>
             </mat-form-field>
+            <div style="display:flex">
+                <ngx-recaptcha2 #ReCaptcha [siteKey]="siteKey" [useGlobalDomain]="false" formControlName="ReCaptcha"
+                    style="margin: 0px auto;position: sticky;">
+                </ngx-recaptcha2>
+            </div>
             <div style="width: 100%; float: left; padding: 0px 0px 15px 0px;">
                 <mat-checkbox #Tc formControlName="Tc"></mat-checkbox><a (click)="OpenTermsConditions();"
                     class="item-blue" style="cursor: pointer;">Acepto lo

@@ -49,6 +49,7 @@ export class CompaniesFormComponent implements OnInit {
     });
   }
   onSave() {
+    this.loadingService.ChangeStatusLoading(true);
     this.genericService
       .Post('empresas/RegistrarEmpresa', this.form.value)
       .subscribe({
@@ -59,7 +60,7 @@ export class CompaniesFormComponent implements OnInit {
             icon: 'success',
             title: 'Empresa, Registrado, exitosamente.',
             showConfirmButton: false,
-            timer: 1300,
+            timer: 1500,
           }).then(() => window.location.reload());
         },
         error: (error) => {
@@ -71,7 +72,7 @@ export class CompaniesFormComponent implements OnInit {
                 ? 'Registro de usuario ¡fallido!  Error: La contraseña no cumple los criterios de seguridad.'
                 : error.error.message,
             showConfirmButton: false,
-            timer: 1300,
+            timer: 1500,
           });
         },
       });

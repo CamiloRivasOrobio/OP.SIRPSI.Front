@@ -6,6 +6,7 @@ import {
   MatDialogRef,
 } from '@angular/material/dialog';
 import { GenericService } from 'src/app/shared/services/generic.service';
+import { LoadingService } from 'src/app/shared/services/loading.service';
 
 @Component({
   selector: 'app-assign-work-centers-user-form',
@@ -20,6 +21,7 @@ export class AssignWorkCentersUserFormComponent implements OnInit {
   constructor(
     public formBuilder: FormBuilder,
     public dialog: MatDialog,
+    public loadingService: LoadingService,
     public genericService: GenericService,
     public dialogRef: MatDialogRef<AssignWorkCentersUserFormComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
@@ -34,6 +36,7 @@ export class AssignWorkCentersUserFormComponent implements OnInit {
       .subscribe((data) => (this.listCentrosCosto = data));
   }
   onSaveCentroTrabajo() {
+    this.loadingService.ChangeStatusLoading(true);
     this.genericService
       .Post('userWorkPlace/RegistrarCentroDeTrabajoUsuario', this.form.value)
       .subscribe({

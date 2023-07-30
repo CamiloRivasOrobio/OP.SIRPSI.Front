@@ -26,17 +26,17 @@ export class GenericService {
       context: skipApiKey(),
     });
   }
-  public Post(origin: string, data?: any): Observable<Response> {
-    return this.http.post<Response>(environment.urlApi + origin, data);
+  public Post(origin: string, data?: any): Observable<any> {
+    return this.http.post<any>(environment.urlApi + origin, data);
   }
-  public Put(origin: string, data?: any): Observable<Response> {
-    return this.http.put<Response>(environment.urlApi + origin, data);
+  public Put(origin: string, data?: any): Observable<any> {
+    return this.http.put<any>(environment.urlApi + origin, data);
   }
-  public Delete(origin: string, id: any): Observable<Response> {
-    return this.http.delete<Response>(environment.urlApi + origin + '/' + id);
+  public Delete(origin: string, id: any): Observable<any> {
+    return this.http.delete<any>(environment.urlApi + origin + '/' + id);
   }
-  public ChangeStatus(origin: string, id: number): Observable<Response> {
-    return this.http.put<Response>(
+  public ChangeStatus(origin: string, id: number): Observable<any> {
+    return this.http.put<any>(
       environment.urlApi + origin + '/status/' + id,
       null
     );

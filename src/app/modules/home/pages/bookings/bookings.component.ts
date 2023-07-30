@@ -248,7 +248,7 @@ export class BookingsComponent implements OnInit {
                     icon: 'success',
                     title: 'Se ha registrado la reserva exitosamente.',
                     showConfirmButton: false,
-                    timer: 1300,
+                    timer: 1500,
                   }).then(() =>
                     this.router.navigate([
                       'reservation/form/' + resultBooking.data + '/view',

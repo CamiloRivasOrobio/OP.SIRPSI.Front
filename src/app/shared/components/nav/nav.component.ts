@@ -65,8 +65,11 @@ export class NavComponent implements OnInit {
           this.accountService.userData.rutasAsignadas.filter(
             (ruta: any) => ruta.ruta == 'companies'
           ).length > 0,
+        Variables:
+          this.accountService.userData.rutasAsignadas.filter(
+            (ruta: any) => ruta.ruta == 'variables'
+          ).length > 0,
       };
-      console.log(this.menuSettings);
     }
   }
   ngOnInit(): void {}

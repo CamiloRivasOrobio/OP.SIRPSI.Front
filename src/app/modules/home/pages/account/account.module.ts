@@ -15,6 +15,8 @@ import { RestorePasswordComponent } from './restore-password/restore-password.co
 import { SelectRoleComponent } from './select-role/select-role.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { TermsConditionsModule } from '../../components/terms-conditions/terms-conditions.module';
+import { NgxCaptchaModule } from 'ngx-captcha';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @NgModule({
   declarations: [
@@ -36,7 +38,9 @@ import { TermsConditionsModule } from '../../components/terms-conditions/terms-c
     MatIconModule,
     MatDividerModule,
     MatCheckboxModule,
-    TermsConditionsModule
+    TermsConditionsModule,
+    NgxCaptchaModule,
+    MatTooltipModule,
   ]
 })
 export class AccountModule { }

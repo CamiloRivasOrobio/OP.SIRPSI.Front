@@ -7,15 +7,14 @@ import {
 } from '@angular/material/dialog';
 import { GenericService } from 'src/app/shared/services/generic.service';
 import { LoadingService } from 'src/app/shared/services/loading.service';
-import { environment } from 'src/environments/environment';
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-roles-form',
-  templateUrl: './roles-form.component.html',
-  styleUrls: ['./roles-form.component.scss'],
+  selector: 'app-configuration-variables-form',
+  templateUrl: './configuration-variables-form.component.html',
+  styleUrls: ['./configuration-variables-form.component.scss'],
 })
-export class RolesFormComponent implements OnInit {
+export class ConfigurationVariablesFormComponent implements OnInit {
   public form: FormGroup;
   public option: string;
   id: number | undefined;
@@ -25,33 +24,37 @@ export class RolesFormComponent implements OnInit {
     public dialog: MatDialog,
     private genericService: GenericService,
     private loadingService: LoadingService,
-    public dialogRef: MatDialogRef<RolesFormComponent>,
+    public dialogRef: MatDialogRef<ConfigurationVariablesFormComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {}
   ngOnInit(): void {
     this.form = this.formBuilder.group({
       Id: '0',
-      Status: environment.activoEstado,
-      Name: ['', Validators.required],
-      Description: '',
+      Descripcion: '',
+      Nombre: ['', Validators.required],
+      Modulo: '',
+      Variable1: '',
+      Variable2: '',
+      Variable3: '',
+      Variable4: '',
     });
   }
   onSave() {
     this.loadingService.ChangeStatusLoading(true);
     this.genericService
-      .Post('roles/RegistrarRoles', this.form.value)
+      .Post('variables/RegistrarVariables', this.form.value)
       .subscribe({
         next: (data) => {
           this.dialogRef.close();
           Swal.fire({
             icon: 'success',
-            title: 'Role Registrado, exitosamente.',
+            title: 'Variable Registrado, exitosamente.',
             showConfirmButton: false,
             timer: 1500,
           }).then(() => window.location.reload());
         },
         error: (error) => {
-          console.log('error usuario' + error.error.message);
+          console.log('error variable ' + error.error.message);
           Swal.fire({
             icon: 'warning',
             title: 'Ha ocurrido un error! ' + error.error.message,
@@ -65,7 +68,9 @@ export class RolesFormComponent implements OnInit {
     this.type = 1;
     this.dialogRef.close();
     this.dialog
-      .open(RolesFormComponent, { data: { id: 0, type: 0, reload: false } })
+      .open(ConfigurationVariablesFormComponent, {
+        data: { id: 0, type: 0, reload: false },
+      })
       .afterClosed()
       .subscribe();
   }

@@ -16,6 +16,9 @@ import { RolesComponent } from './roles/roles.component';
 import { RolesFormComponent } from './roles/roles-form/roles-form.component';
 import { RoutesFormComponent } from './routes/routes-form/routes-form.component';
 import { RoutesRoleComponent } from './routes-role/routes-role.component';
+import { ConfigurationVariablesComponent } from './configuration-variables/configuration-variables.component';
+import { ConfigurationVariablesFormComponent } from './configuration-variables/configuration-variables-form/configuration-variables-form.component';
+import { ValidationEmailVariableFormComponent } from './configuration-variables/validation-email-variable-form/validation-email-variable-form.component';
 
 
 @NgModule({
@@ -25,7 +28,10 @@ import { RoutesRoleComponent } from './routes-role/routes-role.component';
     RolesFormComponent,
     RoutesFormComponent,
     RoutesRoleComponent,
-    RoutesComponent
+    RoutesComponent,
+    ConfigurationVariablesComponent,
+    ConfigurationVariablesFormComponent,
+    ValidationEmailVariableFormComponent
   ],
   imports: [
     CommonModule,

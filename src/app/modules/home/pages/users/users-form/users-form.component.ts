@@ -57,15 +57,22 @@ export class UsersFormComponent implements OnInit {
       .subscribe((data) => (this.listCentrosCosto = data));
   }
   onSave() {
+    this.loadingService.ChangeStatusLoading(true);
     this.genericService.Post('user/RegisterUser', this.form.value).subscribe({
       next: (data) => {
         if (this.data.reload) '';
         else this.dialogRef.close();
+        console.log(data);
+        if (data.estadoId == environment.inactivoEstado)
+          this.sendNotifications(
+            data.user.codeActivation,
+            data.user.phoneNumber
+          );
         Swal.fire({
           icon: 'success',
           title: 'Usuario Registrado, exitosamente.',
           showConfirmButton: false,
-          timer: 1300,
+          timer: 1500,
         }).then(() => window.location.reload());
       },
       error: (error) => {
@@ -77,12 +84,11 @@ export class UsersFormComponent implements OnInit {
               ? 'Registro de usuario ¡fallido!  Error: La contraseña no cumple los criterios de seguridad.'
               : error.error.message,
           showConfirmButton: false,
-          timer: 1300,
+          timer: 1500,
         });
       },
     });
   }
-
   getListas() {
     this.loadingService.ChangeStatusLoading(true);
     this.genericService
@@ -149,7 +155,7 @@ export class UsersFormComponent implements OnInit {
             icon: 'success',
             title: 'Usuario asignado exitosamente.',
             showConfirmButton: false,
-            timer: 1300,
+            timer: 1500,
           }).then(() => window.location.reload());
         },
         error: (error) => {
@@ -157,7 +163,7 @@ export class UsersFormComponent implements OnInit {
             icon: 'warning',
             title: 'Ha ocurrido un error! ' + error.error.message,
             showConfirmButton: false,
-            timer: 1300,
+            timer: 1500,
           });
         },
       });
@@ -173,7 +179,7 @@ export class UsersFormComponent implements OnInit {
               icon: 'success',
               title: 'Usuario asignado exitosamente.',
               showConfirmButton: false,
-              timer: 1300,
+              timer: 1500,
             }).then(() => window.location.reload());
           },
           error: (error) => {
@@ -181,10 +187,22 @@ export class UsersFormComponent implements OnInit {
               icon: 'warning',
               title: 'Ha ocurrido un error! ' + error.error.message,
               showConfirmButton: false,
-              timer: 1300,
+              timer: 1500,
             });
           },
         });
     }
+  }
+  sendNotifications(code: string, numberPhone: string) {
+    var body = {
+      MessageCodeActivation: code,
+      MessageReceiver: numberPhone,
+    };
+    console.log(body);
+    this.genericService
+      .Post('mensajes/EnviarNotificaciónMensajeWhatsApp', body)
+      .subscribe((data: any) => {
+        console.log(data);
+      });
   }
 }

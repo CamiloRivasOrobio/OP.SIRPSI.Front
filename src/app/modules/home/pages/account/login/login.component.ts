@@ -14,6 +14,7 @@ import { TermsConditionsComponent } from '../../../components/terms-conditions/t
 })
 export class LoginComponent implements OnInit {
   public form: FormGroup;
+  public siteKey: string = '6Lf_cGcnAAAAAGQM8rP0Vw3vBTTSe8mUPpMS7wUC';
   hide = true;
   constructor(
     public formBuilder: FormBuilder,
@@ -28,6 +29,7 @@ export class LoginComponent implements OnInit {
       IdCompany: ['346789', Validators.required],
       Document: ['1234567', Validators.required],
       Password: ['Admin123*.', Validators.required],
+      ReCaptcha: ['', Validators.required],
       Tc: [false, Validators.required],
     });
     this.accountService.ValidateSesion();

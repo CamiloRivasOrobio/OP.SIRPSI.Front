@@ -36,6 +36,7 @@ export class RoutesFormComponent implements OnInit {
     });
   }
   onSave() {
+    this.loadingService.ChangeStatusLoading(true);
     this.genericService
       .Post('modulos/RegistrarModulos', this.form.value)
       .subscribe({
@@ -45,7 +46,7 @@ export class RoutesFormComponent implements OnInit {
             icon: 'success',
             title: 'Role Registrado, exitosamente.',
             showConfirmButton: false,
-            timer: 1300,
+            timer: 1500,
           }).then(() => window.location.reload());
         },
         error: (error) => {
@@ -54,7 +55,7 @@ export class RoutesFormComponent implements OnInit {
             icon: 'warning',
             title: 'Ha ocurrido un error! ' + error.error.message,
             showConfirmButton: false,
-            timer: 1300,
+            timer: 1500,
           });
         },
       });

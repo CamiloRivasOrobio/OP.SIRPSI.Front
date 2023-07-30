@@ -42,6 +42,7 @@ export class SelectRoleComponent implements OnInit {
   }
   Cancel() {
     this.accountService.CloseUserSession();
+    // this.router.navigate(['/account/login']);
   }
   openSnackBar(message: string) {
     this.snackBar.open(message, 'x', {
@@ -51,5 +52,6 @@ export class SelectRoleComponent implements OnInit {
   }
   ValidateSession() {
     if (this.roleService.roleSelectData) this.router.navigate(['/dashboard']);
+    if (!this.accountService.userData) this.router.navigate(['/account/login']);
   }
 }

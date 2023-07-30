@@ -7,7 +7,7 @@
             <mat-tab-group>
                 <mat-tab *ngFor="let tab of rolesList; let i=index">
                     <ng-template mat-tab-label>{{tab.name}}</ng-template>
-                    {{tab.id}}
+                    <br />
                     <div class="row" style="width: 97%; margin: 0 auto; text-align: center;">
                         <div class="col-md-6" *ngFor="let route of tab.rutasAsignadasRole">
                             <div class="wrapper">
