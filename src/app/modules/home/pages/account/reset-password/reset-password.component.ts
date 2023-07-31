@@ -49,7 +49,7 @@ export class ResetPasswordComponent implements OnInit {
       },
       (error) => {
         console.error(error);
-        this.openSnackBar(error.error.Message);
+        this.openSnackBar(error.error.message);
         setTimeout(() => this.loadingService.ChangeStatusLoading(false), 800);
       }
     );

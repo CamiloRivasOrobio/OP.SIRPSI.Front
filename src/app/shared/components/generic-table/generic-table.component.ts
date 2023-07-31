@@ -69,7 +69,7 @@ export class GenericTableComponent implements OnInit {
         },
         (error) => {
           console.error(error);
-          this.openSnackBar(error.error.Message);
+          this.openSnackBar(error.error.message);
           setTimeout(
             () => this.loadingService.ChangeStatusLoading(false),
             1200
@@ -100,7 +100,7 @@ export class GenericTableComponent implements OnInit {
           },
           (error) => {
             console.error(error);
-            this.openSnackBar(error.error.Message);
+            this.openSnackBar(error.error.message);
             setTimeout(
               () => this.loadingService.ChangeStatusLoading(false),
               1000
@@ -151,7 +151,7 @@ export class GenericTableComponent implements OnInit {
           },
           (error) => {
             console.error(error);
-            this.openSnackBar(error.error.Message);
+            this.openSnackBar(error.error.message);
             setTimeout(
               () => this.loadingService.ChangeStatusLoading(false),
               1000
