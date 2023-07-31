@@ -56,6 +56,7 @@ export class ValidationEmailVariableFormComponent implements OnInit {
           }).then(() => window.location.reload());
         },
         error: (error) => {
+          this.loadingService.ChangeStatusLoading(false);
           console.log('error variable ' + error.error.message);
           Swal.fire({
             icon: 'warning',

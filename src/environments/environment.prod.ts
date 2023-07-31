@@ -8,4 +8,10 @@ export const environment = {
   urlApi: 'https://localhost:44345/api/',
   // urlApi: 'https://opSIRPSIapi.azurewebsites.net/api/v1/',
   divisa: 'https://api.exchangerate-api.com/v4/latest/USD',
+  retornarModal: {
+    registrarAdmin: 1,
+    registrarPsicologo: 2,
+    registrarTrabajador: 3,
+    asignarPsicologo: 4,
+  },
 };

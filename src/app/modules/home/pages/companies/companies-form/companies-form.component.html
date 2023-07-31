@@ -3,7 +3,7 @@
     <form class="row" #f="ngForm" [formGroup]="this.form">
         <label style="color:white;">This dialog showcases the title, close, content and actions
             elemen</label>
-        <div class="col-md-12">
+        <div class="col-md-6">
             <mat-form-field appearance="outline">
                 <mat-label>Tipo documento: </mat-label>
                 <mat-select id="TipoDocumento" #TipoDocumento formControlName="TipoDocumento">
@@ -13,42 +13,42 @@
                 </mat-select>
             </mat-form-field>
         </div>
-        <div class="col-md-12">
+        <div class="col-md-6">
             <mat-form-field class="example-full-width" appearance="outline" style="width: 100%">
                 <mat-label>Documento:</mat-label>
                 <input type="text" matInput #Documento placeholder="Documento" formControlName="Documento"
                     [readonly]="this.option == 'view'">
             </mat-form-field>
         </div>
-        <div class="col-md-12">
+        <div class="col-md-6">
             <mat-form-field class="example-full-width" appearance="outline" style="width: 100%">
                 <mat-label>Digito de verificación:</mat-label>
                 <input type="text" matInput #DigitoVerificacion placeholder="Digito de verificación"
                     formControlName="DigitoVerificacion" [readonly]="this.option == 'view'">
             </mat-form-field>
         </div>
-        <div class="col-md-12">
+        <div class="col-md-6">
             <mat-form-field class="example-full-width" appearance="outline" style="width: 100%">
                 <mat-label>Nombre:</mat-label>
                 <input type="text" matInput #Nombre placeholder="Nombre" formControlName="Nombre"
                     [readonly]="this.option == 'view'">
             </mat-form-field>
         </div>
-        <div class="col-md-12">
+        <div class="col-md-6">
             <mat-form-field class="example-full-width" appearance="outline" style="width: 100%">
                 <mat-label>Descripcion:</mat-label>
                 <input type="text" matInput #Descripcion placeholder="Descripcion" formControlName="Descripcion"
                     [readonly]="this.option == 'view'">
             </mat-form-field>
         </div>
-        <div class="col-md-12">
+        <div class="col-md-6">
             <mat-form-field class="example-full-width" appearance="outline" style="width: 100%">
                 <mat-label>Observacion:</mat-label>
                 <input type="text" matInput #Observacion placeholder="Observacion" formControlName="Observacion"
                     [readonly]="this.option == 'view'">
             </mat-form-field>
         </div>
-        <div class="col-md-12">
+        <div class="col-md-6">
             <mat-form-field appearance="outline">
                 <mat-label>Ministerio: </mat-label>
                 <mat-select id="IdMinisterio" #IdMinisterio formControlName="IdMinisterio">
@@ -58,7 +58,7 @@
                 </mat-select>
             </mat-form-field>
         </div>
-        <div class="col-md-12">
+        <div class="col-md-6">
             <mat-form-field appearance="outline">
                 <mat-label>Tipo de empresa: </mat-label>
                 <mat-select id="IdTipoEmpresa" #IdTipoEmpresa formControlName="IdTipoEmpresa">
@@ -68,7 +68,7 @@
                 </mat-select>
             </mat-form-field>
         </div>
-        <div class="col-md-12">
+        <div class="col-md-6">
             <mat-form-field appearance="outline">
                 <mat-label>Estado: </mat-label>
                 <mat-select id="IdEstado" #IdEstado formControlName="IdEstado">
@@ -78,14 +78,14 @@
                 </mat-select>
             </mat-form-field>
         </div>
-        <div class="col-md-12">
+        <div class="col-md-6">
             <mat-form-field appearance="outline">
                 <mat-label>Adminitrador: </mat-label>
                 <mat-select id="IdUsuario" #IdUsuario formControlName="IdUsuario">
                     <mat-option [value]="usuario.id" *ngFor="let usuario of listUsuario; let i = index">
                         {{usuario.cedula}} - {{usuario.nombreUsuario}}
                     </mat-option>
-                    <mat-option [value]="0" (click)="changeViewFormUser()">
+                    <mat-option [value]="0" (click)="changeViewFormUser(1, 1)">
                         Registrar usuario
                     </mat-option>
                 </mat-select>

@@ -6,6 +6,7 @@ import { GenericService } from 'src/app/shared/services/generic.service';
 import { LoadingService } from 'src/app/shared/services/loading.service';
 import Swal from 'sweetalert2';
 import { environment } from 'src/environments/environment';
+import { CompaniesFormComponent } from '../../companies/companies-form/companies-form.component';
 
 @Component({
   selector: 'app-users-form',
@@ -17,6 +18,7 @@ export class UsersFormComponent implements OnInit {
   public formEmpresa: FormGroup;
   public option: string;
   public listCentrosCosto: any;
+  public viewStatus: boolean = true;
   estadosList: any;
   listUsuario: any;
   listEmpresas: any;
@@ -35,19 +37,29 @@ export class UsersFormComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {}
   ngOnInit(): void {
+    this.viewStatus = this.data.estado == undefined;
     this.getListas();
     this.form = this.formBuilder.group({
       IdTypeDocument: ['', Validators.required],
       Document: ['', Validators.required],
       IdCountry: ['', Validators.required],
-      IdCompany: ['', Validators.required],
+      IdCompany:
+        this.data.retornarModal != undefined ? '' : ['', Validators.required],
       Names: ['', Validators.required],
       Surnames: ['', Validators.required],
-      IdRol: ['', Validators.required],
+      IdRol:
+        this.data.role == undefined
+          ? ['', Validators.required]
+          : this.data.role == 1
+          ? environment.adminitradorEmpRole
+          : environment.psicologoRole,
       Password: ['', Validators.required],
       PhoneNumber: '',
       Email: ['', Validators.required],
-      IdEstado: ['', Validators.required],
+      IdEstado:
+        this.data.estado != undefined
+          ? environment.activoEstado
+          : ['', Validators.required],
     });
     this.formEmpresa = this.formBuilder.group({
       Usuario: ['', Validators.required],
@@ -62,7 +74,6 @@ export class UsersFormComponent implements OnInit {
       next: (data) => {
         if (this.data.reload) '';
         else this.dialogRef.close();
-        console.log(data);
         if (data.estadoId == environment.inactivoEstado)
           this.sendNotifications(
             data.user.codeActivation,
@@ -73,9 +84,10 @@ export class UsersFormComponent implements OnInit {
           title: 'Usuario Registrado, exitosamente.',
           showConfirmButton: false,
           timer: 1500,
-        }).then(() => window.location.reload());
+        }).then(() => this.returnViewOrReload(data.user.id));
       },
       error: (error) => {
+        this.loadingService.ChangeStatusLoading(false);
         Swal.fire({
           icon: 'warning',
           title:
@@ -140,7 +152,16 @@ export class UsersFormComponent implements OnInit {
     this.type = 1;
     this.dialogRef.close();
     this.dialog
-      .open(UsersFormComponent, { data: { id: 0, type: 0, reload: false } })
+      .open(UsersFormComponent, {
+        data: {
+          id: 0,
+          type: 0,
+          reload: false,
+          estado: this.data.estado,
+          role: this.data.role,
+          retornarModal: this.data.retornarModal,
+        },
+      })
       .afterClosed()
       .subscribe();
   }
@@ -198,11 +219,22 @@ export class UsersFormComponent implements OnInit {
       MessageCodeActivation: code,
       MessageReceiver: numberPhone,
     };
-    console.log(body);
     this.genericService
       .Post('mensajes/EnviarNotificaciónMensajeWhatsApp', body)
       .subscribe((data: any) => {
         console.log(data);
       });
+  }
+  returnViewOrReload(id: string) {
+    this.loadingService.ChangeStatusLoading(false);
+    if (this.data.retornarModal == undefined) window.location.reload();
+    if (this.data.retornarModal == environment.retornarModal.registrarAdmin) {
+      this.dialogRef.close();
+      this.dialog
+        .open(CompaniesFormComponent, { data: { user: id, table: 0 } })
+        .afterClosed()
+        .subscribe();
+    }
+    // if (this.data.retornarModal == undefined) window.location.reload();
   }
 }

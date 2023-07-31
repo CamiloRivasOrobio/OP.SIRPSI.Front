@@ -21,14 +21,15 @@ export class UsersComponent implements OnInit {
   // public filter: string = '&Usuario=' + this.accountService.userData.id;
   public table: string = 'usuario/ConsultarUsuarios';
   public columns = [
-    { name: 'Tipo documento', data: 'nombreTipoDocumento' },
+    { name: 'Tipo documento', data: 'tipoDocumento', property: 'nombre' },
     { name: 'Cédula', data: 'cedula' },
     { name: 'Correo', data: 'correo' },
     { name: 'Telefono', data: 'telefono' },
-    { name: 'Empresa', data: 'nombreEmpresa' },
+    { name: 'Empresa', data: 'empresa', property: 'nombre' },
+    { name: 'Rol', data: 'role', property: 'name' },
     { name: 'Nombre', data: 'nombreUsuario' },
     { name: 'Apellidos', data: 'apellidosUsuario' },
-    { name: 'Estado', data: 'nombreEstado' },
+    { name: 'Estado', data: 'estado', property: 'nombre' },
   ];
   public options = [
     {

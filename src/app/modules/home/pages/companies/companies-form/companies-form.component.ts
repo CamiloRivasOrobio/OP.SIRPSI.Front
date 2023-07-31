@@ -45,7 +45,7 @@ export class CompaniesFormComponent implements OnInit {
       Observacion: '',
       IdMinisterio: ['', Validators.required],
       IdEstado: ['', Validators.required],
-      IdUsuario: '',
+      IdUsuario: this.data.user != undefined ? this.data.user : '',
     });
   }
   onSave() {
@@ -64,6 +64,7 @@ export class CompaniesFormComponent implements OnInit {
           }).then(() => window.location.reload());
         },
         error: (error) => {
+          this.loadingService.ChangeStatusLoading(false);
           Swal.fire({
             icon: 'warning',
             title:
@@ -99,6 +100,7 @@ export class CompaniesFormComponent implements OnInit {
                     this.genericService
                       .GetAll('usuario/ConsultarUsuarios')
                       .subscribe((data: any) => {
+                        console.log(this.data.table);
                         this.listUsuario = data.filter(
                           (data: any) =>
                             data.idRol ==
@@ -118,10 +120,23 @@ export class CompaniesFormComponent implements OnInit {
           });
       });
   }
-  changeViewFormUser() {
+  changeViewFormUser(role: number, estado: number) {
+    var roleId;
+    var estadoId;
+    if (role == 1) roleId = environment.adminitradorEmpRole;
+    if (estado == 1) estadoId = environment.activoEstado;
     this.dialogRef.close();
     this.dialog
-      .open(UsersFormComponent, { data: { id: 0, type: 0, reload: false } })
+      .open(UsersFormComponent, {
+        data: {
+          id: 0,
+          type: 0,
+          reload: false,
+          estado: estadoId,
+          role: roleId,
+          retornarModal: environment.retornarModal.registrarAdmin,
+        },
+      })
       .afterClosed()
       .subscribe();
   }

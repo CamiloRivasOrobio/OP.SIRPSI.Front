@@ -42,6 +42,7 @@ export class AssignWorkCentersFormComponent implements OnInit {
           this.toastr.success('Usuario Registrado, exitosamente!');
         },
         error: (error) => {
+          this.loadingService.ChangeStatusLoading(false);
           console.log('error usuario' + error.error.message);
           this.toastr.error('Ha ocurrido un error! ' + error.error.message);
         },

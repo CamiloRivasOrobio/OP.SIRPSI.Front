@@ -3,7 +3,7 @@
     <form class="row" #f="ngForm" [formGroup]="this.form" *ngIf="type == 0">
         <label style="color:white;">This dialog showcases the title, close, content and actions
             elemen</label>
-        <div class="col-md-12">
+        <div class="col-md-6">
             <mat-form-field appearance="outline">
                 <mat-label>Tipo documento: </mat-label>
                 <mat-select id="IdTypeDocument" #IdTypeDocument formControlName="IdTypeDocument">
@@ -13,49 +13,49 @@
                 </mat-select>
             </mat-form-field>
         </div>
-        <div class="col-md-12">
+        <div class="col-md-6">
             <mat-form-field class="example-full-width" appearance="outline" style="width: 100%">
                 <mat-label>Documento:</mat-label>
                 <input type="text" matInput #Document placeholder="Documento" formControlName="Document"
                     [readonly]="this.option == 'view'">
             </mat-form-field>
         </div>
-        <div class="col-md-12">
+        <div class="col-md-6">
             <mat-form-field class="example-full-width" appearance="outline" style="width: 100%">
                 <mat-label>Nombre:</mat-label>
                 <input type="text" matInput #Names placeholder="Nombre" formControlName="Names"
                     [readonly]="this.option == 'view'">
             </mat-form-field>
         </div>
-        <div class="col-md-12">
+        <div class="col-md-6">
             <mat-form-field class="example-full-width" appearance="outline" style="width: 100%">
                 <mat-label>Apellidos:</mat-label>
                 <input type="text" matInput #Surnames placeholder="Apellidos" formControlName="Surnames"
                     [readonly]="this.option == 'view'">
             </mat-form-field>
         </div>
-        <div class="col-md-12">
+        <div class="col-md-6">
             <mat-form-field class="example-full-width" appearance="outline" style="width: 100%">
                 <mat-label>Contraseña:</mat-label>
                 <input type="password" matInput #Password placeholder="Contraseña" formControlName="Password"
                     [readonly]="this.option == 'view'">
             </mat-form-field>
         </div>
-        <div class="col-md-12">
+        <div class="col-md-6">
             <mat-form-field class="example-full-width" appearance="outline" style="width: 100%">
                 <mat-label>Email:</mat-label>
                 <input type="email" matInput #Email placeholder="Email" formControlName="Email"
                     [readonly]="this.option == 'view'">
             </mat-form-field>
         </div>
-        <div class="col-md-12">
+        <div class="col-md-6">
             <mat-form-field class="example-full-width" appearance="outline" style="width: 100%">
                 <mat-label>Numero:</mat-label>
                 <input type="text" matInput #PhoneNumber placeholder="Numero" formControlName="PhoneNumber"
                     [readonly]="this.option == 'view'">
             </mat-form-field>
         </div>
-        <div class="col-md-12">
+        <div class="col-md-6" [ngStyle]="{'display': (this.data.role == undefined ? 'block' : 'none')}">
             <mat-form-field appearance="outline">
                 <mat-label>Role: </mat-label>
                 <mat-select id="IdRol" #IdRol formControlName="IdRol">
@@ -65,7 +65,7 @@
                 </mat-select>
             </mat-form-field>
         </div>
-        <div class="col-md-12">
+        <div class="col-md-6">
             <mat-form-field appearance="outline">
                 <mat-label>Pais: </mat-label>
                 <mat-select id="IdCountry" #IdCountry formControlName="IdCountry">
@@ -75,7 +75,7 @@
                 </mat-select>
             </mat-form-field>
         </div>
-        <div class="col-md-12">
+        <div class="col-md-6" [ngStyle]="{'display': (this.data.retornarModal == undefined ? 'block' : 'none')}">
             <mat-form-field appearance="outline">
                 <mat-label>Empresa: </mat-label>
                 <mat-select id="IdCompany" #IdCompany formControlName="IdCompany">
@@ -85,7 +85,7 @@
                 </mat-select>
             </mat-form-field>
         </div>
-        <div class="col-md-12">
+        <div class="col-md-6" [ngStyle]="{'display': (this.viewStatus ? 'block' : 'none')}">
             <mat-form-field appearance="outline">
                 <mat-label>Estado: </mat-label>
                 <mat-select id="IdEstado" #IdEstado formControlName="IdEstado">

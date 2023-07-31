@@ -7,6 +7,7 @@ import { LoadingService } from 'src/app/shared/services/loading.service';
 import { UsersFormComponent } from '../users/users-form/users-form.component';
 import { AssignWorkCentersFormComponent } from '../work-centers/assign-work-centers-form/assign-work-centers-form.component';
 import { CompaniesFormComponent } from './companies-form/companies-form.component';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-companies',
@@ -80,9 +81,18 @@ export class CompaniesComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe();
   }
-  onAssignAdmin(item: any, table: number = 0) {
+  onAssignAdmin(item: any, table: number = 0, estado: number = 1, role: number = 1) {
     const dialogRef = this.dialog.open(UsersFormComponent, {
-      data: { id: 0, type: 1, item: item, reload: true, table: table },
+      data: {
+        id: 0,
+        type: 1,
+        item: item,
+        reload: true,
+        table: table,
+        estado: estado,
+        role: role,
+        retornarModal: environment.retornarModal.asignarPsicologo
+      },
     });
     dialogRef.afterClosed().subscribe();
   }
@@ -95,13 +105,12 @@ export class CompaniesComponent implements OnInit {
           item.idConsecutivo
       )
       .subscribe((data: any) => {
-        console.log(data);
         this.dataTable = data;
       });
   }
   openFormDialogUser() {
     const dialogRef = this.dialog.open(CompaniesFormComponent, {
-      data: { id: this.id, type: 0, reload: true },
+      data: { id: this.id, type: 0, reload: true, table: 0 },
     });
     dialogRef.afterClosed().subscribe();
   }
