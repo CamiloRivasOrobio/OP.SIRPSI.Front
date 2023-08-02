@@ -188,7 +188,7 @@ export class UsersFormComponent implements OnInit {
           });
         },
       });
-    } else {
+    } else if (this.table == 1) {
       var centroTrabajo = this.data.item;
       centroTrabajo.IdUsuario = this.formEmpresa.value.Usuario;
       this.genericService
@@ -212,6 +212,31 @@ export class UsersFormComponent implements OnInit {
             });
           },
         });
+    } else if (this.table == 2) {
+      var centroTrabajo = this.data.item;
+      console.log(this.data.item);
+      // centroTrabajo.IdUsuario = this.formEmpresa.value.Usuario;
+      // this.genericService
+      //   .Put('centrotrabajo/ActualizarCentroDeTrabajo', centroTrabajo)
+      //   .subscribe({
+      //     next: (data) => {
+      //       this.dialogRef.close();
+      //       Swal.fire({
+      //         icon: 'success',
+      //         title: 'Usuario asignado exitosamente.',
+      //         showConfirmButton: false,
+      //         timer: 1500,
+      //       }).then(() => window.location.reload());
+      //     },
+      //     error: (error) => {
+      //       Swal.fire({
+      //         icon: 'warning',
+      //         title: 'Ha ocurrido un error! ' + error.error.message,
+      //         showConfirmButton: false,
+      //         timer: 1500,
+      //       });
+      //     },
+      //   });
     }
   }
   sendNotifications(code: string, numberPhone: string) {

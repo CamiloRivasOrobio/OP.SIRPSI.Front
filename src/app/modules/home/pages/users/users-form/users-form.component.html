@@ -122,4 +122,6 @@
         *ngIf="type == 1 && table == 0">Asignar</button>
     <button mat-button (click)="onUpdateEmpresa()" cdkFocusInitial [disabled]="this.formEmpresa.invalid"
         *ngIf="type == 1 && table == 1">Asignar psicologo</button>
+    <button mat-button (click)="onUpdateEmpresa()" cdkFocusInitial [disabled]="this.formEmpresa.invalid"
+        *ngIf="type == 1 && table == 2">Asignar trabajador</button>
 </div>

@@ -17,6 +17,7 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
 import { TermsConditionsModule } from '../../components/terms-conditions/terms-conditions.module';
 import { NgxCaptchaModule } from 'ngx-captcha';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { ActivateUserComponent } from './activate-user/activate-user.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     RestorePasswordComponent,
     SelectRoleComponent,
     ResetPasswordComponent,
+    ActivateUserComponent,
   ],
   imports: [
     CommonModule,

@@ -18,6 +18,7 @@ export class GenericTableComponent implements OnInit {
   @Output() assign = new EventEmitter<any>();
   @Input('columns') columns: any = [];
   @Input('table') table: string = '';
+  @Input('delete') delete: string = '';
   @Input('filter') filter: any = '';
   @Input('options') options: any = [];
   @Input('dataTable') dataTable: any;
@@ -88,7 +89,7 @@ export class GenericTableComponent implements OnInit {
     }).then((result) => {
       if (result.isConfirmed) {
         this.loadingService.ChangeStatusLoading(true);
-        this.genericService.Delete(this.table, id).subscribe(
+        this.genericService.Delete(this.delete, id).subscribe(
           (data) => {
             this.openSnackBar(data.message);
             setTimeout(

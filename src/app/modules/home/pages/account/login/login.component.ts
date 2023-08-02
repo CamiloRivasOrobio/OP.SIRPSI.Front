@@ -51,8 +51,9 @@ export class LoginComponent implements OnInit {
       );
     } else {
       Swal.fire(
-        'Cuidado',
-        'Por favor aceptar los terminos y condiciones.',
+        'Estimado/a Usuario/a',
+        'Para continuar, debes aceptar los términos y condiciones del sistema SIRPSI.' +
+          '\nPor favor, marca la casilla de aceptación antes de avanzar.',
         'warning'
       );
     }

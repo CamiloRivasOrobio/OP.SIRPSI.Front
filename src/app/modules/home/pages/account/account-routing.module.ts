@@ -6,12 +6,14 @@ import { RestorePasswordComponent } from './restore-password/restore-password.co
 import { SelectRoleComponent } from './select-role/select-role.component';
 import { AuthGuard } from 'src/app/core/security/auth.guard';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
+import { ActivateUserComponent } from './activate-user/activate-user.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'restore-password', component: RestorePasswordComponent },
   { path: 'reset-password', component: ResetPasswordComponent },
+  { path: 'activate-user', component: ActivateUserComponent },
   {
     path: 'select-role',
     component: SelectRoleComponent,

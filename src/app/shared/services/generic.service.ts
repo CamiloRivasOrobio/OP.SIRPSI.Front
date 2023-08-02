@@ -33,7 +33,9 @@ export class GenericService {
     return this.http.put<any>(environment.urlApi + origin, data);
   }
   public Delete(origin: string, id: any): Observable<any> {
-    return this.http.delete<any>(environment.urlApi + origin + '/' + id);
+    return this.http.delete<any>(environment.urlApi + origin, {
+      body: { Id: id },
+    });
   }
   public ChangeStatus(origin: string, id: number): Observable<any> {
     return this.http.put<any>(
