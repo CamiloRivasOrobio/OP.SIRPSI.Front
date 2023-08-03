@@ -84,7 +84,7 @@ export class CompaniesComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    setTimeout(() => this.loadingService.ChangeStatusLoading(false), 500);
+    setTimeout(() => this.loadingService.ChangeStatusLoading(false), 1100);
   }
 
   OpenFormDialog(event: any) {
@@ -99,6 +99,7 @@ export class CompaniesComponent implements OnInit {
     estado: number = 1,
     role: number = 1
   ) {
+    console.log(item);
     const dialogRef = this.dialog.open(UsersFormComponent, {
       data: {
         id: 0,
@@ -109,6 +110,7 @@ export class CompaniesComponent implements OnInit {
         estado: estado,
         role: role,
         retornarModal: environment.retornarModal.asignarPsicologo,
+        empresa: 1,
       },
     });
     dialogRef.afterClosed().subscribe();

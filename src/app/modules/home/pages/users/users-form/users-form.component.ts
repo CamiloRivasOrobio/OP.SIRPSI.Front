@@ -43,8 +43,7 @@ export class UsersFormComponent implements OnInit {
       IdTypeDocument: ['', Validators.required],
       Document: ['', Validators.required],
       IdCountry: ['', Validators.required],
-      IdCompany:
-        this.data.retornarModal != undefined ? '' : ['', Validators.required],
+      IdCompany: '',
       Names: ['', Validators.required],
       Surnames: ['', Validators.required],
       IdRol:
@@ -58,7 +57,7 @@ export class UsersFormComponent implements OnInit {
       Email: ['', Validators.required],
       IdEstado:
         this.data.estado != undefined
-          ? environment.activoEstado
+          ? environment.inactivoEstado
           : ['', Validators.required],
     });
     this.formEmpresa = this.formBuilder.group({
@@ -139,7 +138,7 @@ export class UsersFormComponent implements OnInit {
                             setTimeout(
                               () =>
                                 this.loadingService.ChangeStatusLoading(false),
-                              500
+                              1200
                             );
                           });
                       });

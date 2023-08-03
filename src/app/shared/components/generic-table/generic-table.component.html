@@ -20,7 +20,7 @@
                     date: column.pipeDate) :
                     da[column.data] != null ? da[column.data][column.property] : ""
                     )) }}</td>
-                <td *ngIf="this.columns.length > 0 && this.options.length > 0">
+                <td *ngIf="this.columns.length > 0 && this.options.length > 0" style="display: flex;">
                     <button *ngIf="this.options[0].delete" (click)="this.DeletePeople(da.id);" type="button"
                         class="btn btn-danger" #tooltip="matTooltip" matTooltip="Eliminar">
                         <i class="fa-solid fa-trash"></i>

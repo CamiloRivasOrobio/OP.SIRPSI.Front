@@ -20,7 +20,7 @@ export class ActivateUserComponent implements OnInit {
 
   ngOnInit(): void {
     this.form = this.formBuilder.group({
-      Empresa: ['3467', Validators.required],
+      Company: ['3467', Validators.required],
       Document: ['', Validators.required],
       Code: ['', Validators.required],
     });
@@ -29,7 +29,7 @@ export class ActivateUserComponent implements OnInit {
   }
   GetInto() {
     this.loadingService.ChangeStatusLoading(true);
-    this.accountService.SendChangedPasswword(this.form.value).subscribe(
+    this.accountService.ActivateUser(this.form.value).subscribe(
       (result: any) => {
         this.openSnackBar(result.message);
         setTimeout(() => this.loadingService.ChangeStatusLoading(false), 800);

@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable, map, BehaviorSubject } from 'rxjs';
 import {
+  ActivateUserRequest,
   AuthenticationRequest,
   ChangedPasswwordRequest,
   RecoverPasswordRequest,
@@ -105,7 +106,7 @@ export class AccountService {
         if (!this.roleService.roleSelectData)
           this.router.navigate(['/account/select-role']);
       }
-    } 
+    }
   }
 
   public SendChangedPasswword(data: ChangedPasswwordRequest): Observable<any> {
@@ -124,6 +125,19 @@ export class AccountService {
   public RecoverPassword(data: RecoverPasswordRequest): Observable<any> {
     return this.http
       .post<any>(environment.urlApi + 'User/RecoverPassword', data)
+      .pipe(
+        map((res) => {
+          if (res.Status == '400') {
+            console.log(res);
+          }
+          return res;
+        })
+      );
+  }
+
+  public ActivateUser(data: ActivateUserRequest): Observable<any> {
+    return this.http
+      .post<any>(environment.urlApi + 'User/ActivateUser', data)
       .pipe(
         map((res) => {
           if (res.Status == '400') {

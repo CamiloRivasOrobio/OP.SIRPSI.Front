@@ -83,7 +83,7 @@
                 <mat-label>Adminitrador: </mat-label>
                 <mat-select id="IdUsuario" #IdUsuario formControlName="IdUsuario">
                     <mat-option [value]="usuario.id" *ngFor="let usuario of listUsuario; let i = index">
-                        {{usuario.cedula}} - {{usuario.nombreUsuario}}
+                        {{usuario.cedula}} - {{usuario.nombreUsuario}} {{usuario.apellidosUsuario}}
                     </mat-option>
                     <mat-option [value]="0" (click)="changeViewFormUser(1, 1)">
                         Registrar usuario

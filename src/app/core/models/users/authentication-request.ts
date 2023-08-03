@@ -16,3 +16,8 @@ export interface RecoverPasswordRequest {
   NewPassword: string ;
   ConfirmPassword: string ;
 }
+export interface ActivateUserRequest {
+  Company: string;
+  Document: string;
+  Code: string ;
+}
