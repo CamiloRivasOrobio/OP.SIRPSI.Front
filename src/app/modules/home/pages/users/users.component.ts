@@ -37,7 +37,7 @@ export class UsersComponent implements OnInit {
       edit: true,
       details: true,
       select: true,
-      state: false,
+      state: true,
       pdf: false,
       validationSelect: true,
     },

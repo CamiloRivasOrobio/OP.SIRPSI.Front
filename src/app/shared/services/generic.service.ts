@@ -37,10 +37,14 @@ export class GenericService {
       body: { Id: id },
     });
   }
-  public ChangeStatus(origin: string, id: number): Observable<any> {
-    return this.http.put<any>(
-      environment.urlApi + origin + '/status/' + id,
-      null
-    );
+  public ChangeStatus(
+    origin: string,
+    id: string,
+    estado: string
+  ): Observable<any> {
+    return this.http.put<any>(environment.urlApi + origin, {
+      Id: id,
+      IdEstado: estado,
+    });
   }
 }

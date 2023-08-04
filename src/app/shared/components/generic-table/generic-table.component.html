@@ -33,11 +33,11 @@
                         class="btn btn-warning" style="margin: 0px 6px 0px 0px;" #tooltip="matTooltip"
                         matTooltip="Detalle"><i class="fa-regular fa-eye"></i>
                     </button>
-                    <button *ngIf="this.options[0].state" (click)="this.ChangeStaTus(da.id)" type="button"
-                        [ngClass]="da.estado == 0 ? 'btn btn-secondary' : 'btn btn-success'"
+                    <button *ngIf="this.options[0].state" (click)="this.ChangeStaTus(da)" type="button"
+                        [ngClass]="(da[nameColumnStatus] == this.state ? 'btn btn-secondary' : 'btn btn-success')"
                         style="margin: 0px 6px 0px 0px;" #tooltip="matTooltip"
-                        [matTooltip]="da.estado == 0 ? 'Deshabilitar' : 'Habilitar'"><i
-                            [ngClass]="da.estado == 0 ? 'fa-solid fa-circle-xmark' : 'fa-solid fa-circle-check'"></i>
+                        [matTooltip]="da[nameColumnStatus] == this.state ? 'Deshabilitar' : 'Habilitar'"><i
+                            [ngClass]="da[nameColumnStatus] == this.state ? 'fa-solid fa-circle-xmark' : 'fa-solid fa-circle-check'"></i>
                     </button>
                     <button *ngIf="this.options[0].pdf" (click)="this.DetailOrEditItem(da.id, 3)" type="button"
                         class="btn btn-info"

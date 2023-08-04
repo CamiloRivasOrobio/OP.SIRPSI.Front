@@ -4,6 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { GenericService } from 'src/app/shared/services/generic.service';
 import { LoadingService } from '../../services/loading.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-generic-table',
@@ -19,9 +20,12 @@ export class GenericTableComponent implements OnInit {
   @Input('columns') columns: any = [];
   @Input('table') table: string = '';
   @Input('delete') delete: string = '';
+  @Input('changeStatus') changeStatus: string = '';
+  @Input('nameColumnStatus') nameColumnStatus: string = 'idEstado';
   @Input('filter') filter: any = '';
   @Input('options') options: any = [];
   @Input('dataTable') dataTable: any;
+  public state: string = environment.activoEstado;
   public data: any[] = [];
   public pageSize: number = 5;
   public pageNumber: number = 0;
@@ -133,7 +137,7 @@ export class GenericTableComponent implements OnInit {
       verticalPosition: 'bottom',
     });
   }
-  ChangeStaTus(id: number) {
+  ChangeStaTus(item: any) {
     Swal.fire({
       title: '¿Estas seguro?',
       icon: 'info',
@@ -143,22 +147,24 @@ export class GenericTableComponent implements OnInit {
     }).then((result) => {
       if (result.isConfirmed) {
         this.loadingService.ChangeStatusLoading(true);
-        this.genericService.ChangeStatus(this.table, id).subscribe(
-          (data) => {
-            this.loadingService.ChangeStatusLoading(false);
-            if (this.dataTable == undefined) this.Get();
-            else window.location.reload();
-            this.openSnackBar(data.message);
-          },
-          (error) => {
-            console.error(error);
-            this.openSnackBar(error.error.message);
-            setTimeout(
-              () => this.loadingService.ChangeStatusLoading(false),
-              1000
-            );
-          }
-        );
+        this.genericService
+          .ChangeStatus(this.changeStatus, item.id, item.idEstado)
+          .subscribe(
+            (data) => {
+              this.loadingService.ChangeStatusLoading(false);
+              if (this.dataTable == undefined) this.Get();
+              else window.location.reload();
+              this.openSnackBar(data.message);
+            },
+            (error) => {
+              console.error(error);
+              this.openSnackBar(error.error.message);
+              setTimeout(
+                () => this.loadingService.ChangeStatusLoading(false),
+                1000
+              );
+            }
+          );
       }
     });
   }

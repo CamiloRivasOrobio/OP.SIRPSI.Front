@@ -110,7 +110,8 @@ export class CompaniesComponent implements OnInit {
         estado: estado,
         role: role,
         retornarModal: environment.retornarModal.asignarPsicologo,
-        empresa: 1,
+        empresa: table != 0 ? item.idEmpresa : item.id,
+        centroTrabajo: null,
       },
     });
     dialogRef.afterClosed().subscribe();

@@ -32,7 +32,7 @@ export class RoutesRoleComponent {
       .GetAll('roles/ConsultarRoles')
       .subscribe((data: any) => {
         this.rolesList = data;
-        setTimeout(() => this.loadingService.ChangeStatusLoading(false), 10);
+        setTimeout(() => this.loadingService.ChangeStatusLoading(false), 500);
       });
   }
   SelectedItem(role: string, modulo: string, event: any) {
@@ -48,7 +48,8 @@ export class RoutesRoleComponent {
         body
       )
       .subscribe((data: any) => {
-        setTimeout(() => this.loadingService.ChangeStatusLoading(false), 500);
+        this.LoadLists();
+        // setTimeout(() => this.loadingService.ChangeStatusLoading(false), 500);
         this.openSnackBar(
           event.checked
             ? 'Se ha asignado correctamente'
@@ -61,5 +62,8 @@ export class RoutesRoleComponent {
       horizontalPosition: 'start',
       verticalPosition: 'bottom',
     });
+  }
+  AssignPermissions(item: any){
+    console.log(item);
   }
 }

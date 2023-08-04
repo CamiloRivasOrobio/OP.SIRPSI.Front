@@ -19,6 +19,7 @@ import { RoutesRoleComponent } from './routes-role/routes-role.component';
 import { ConfigurationVariablesComponent } from './configuration-variables/configuration-variables.component';
 import { ConfigurationVariablesFormComponent } from './configuration-variables/configuration-variables-form/configuration-variables-form.component';
 import { ValidationEmailVariableFormComponent } from './configuration-variables/validation-email-variable-form/validation-email-variable-form.component';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 
 @NgModule({
@@ -46,7 +47,8 @@ import { ValidationEmailVariableFormComponent } from './configuration-variables/
     MatButtonModule,
     FileUploadModule,
     MatCheckboxModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatTooltipModule,
   ]
 })
 export class ConfigurationModule { }

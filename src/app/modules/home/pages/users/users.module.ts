@@ -15,9 +15,11 @@ import { HttpClientModule } from '@angular/common/http';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatNativeDateModule } from '@angular/material/core';
+import { ActivateInactiveUsersComponent } from './activate-inactive-users/activate-inactive-users.component';
+import { UsersCompanyComponent } from './users-company/users-company.component';
 
 @NgModule({
-  declarations: [UsersComponent, UsersFormComponent],
+  declarations: [UsersComponent, UsersFormComponent, ActivateInactiveUsersComponent, UsersCompanyComponent],
   imports: [
     CommonModule,
     UsersRoutingModule,

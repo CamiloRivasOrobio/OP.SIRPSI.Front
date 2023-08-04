@@ -9,23 +9,39 @@
                     <ng-template mat-tab-label>{{tab.name}}</ng-template>
                     <br />
                     <div class="row" style="width: 97%; margin: 0 auto; text-align: center;">
-                        <div class="col-md-6" *ngFor="let route of tab.rutasAsignadasRole">
-                            <div class="wrapper">
+                        <div class="col-md-6" *ngFor="let route of tab.rutasAsignadasRole; let x=index">
+                            <div class="wrapper table table-responsive">
                                 <table class="table table-responsive">
-                                    <thead class="table-dark align-middle">
+                                    <thead class="table-dark align-middle table table-responsive">
                                         <tr>
                                             <th>Seleccionar</th>
                                             <th>Nombre</th>
                                             <th>Ruta</th>
+                                            <th>Crear</th>
+                                            <th>Listar</th>
+                                            <th>Actualizar</th>
+                                            <th>Eliminar</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
+                                    <tbody class="table table-responsive">
                                         <tr>
                                             <td><mat-checkbox [checked]="route.inUse"
                                                     (change)="SelectedItem(tab.id, route.id, $event)"></mat-checkbox>
                                             </td>
                                             <td>{{route.nombre}}</td>
                                             <td>{{route.ruta}}</td>
+                                            <td><mat-checkbox [checked]="route.inUse"
+                                                    (change)="SelectedItem(tab.id, route.id, $event)"></mat-checkbox>
+                                            </td>
+                                            <td><mat-checkbox [checked]="route.inUse"
+                                                    (change)="SelectedItem(tab.id, route.id, $event)"></mat-checkbox>
+                                            </td>
+                                            <td><mat-checkbox [checked]="route.inUse"
+                                                    (change)="SelectedItem(tab.id, route.id, $event)"></mat-checkbox>
+                                            </td>
+                                            <td><mat-checkbox [checked]="route.inUse"
+                                                    (change)="SelectedItem(tab.id, route.id, $event)"></mat-checkbox>
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>

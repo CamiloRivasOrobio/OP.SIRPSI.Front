@@ -135,6 +135,11 @@ export class UsersFormComponent implements OnInit {
                                   ? environment.psicologoRole
                                   : environment.trabajadorRole)
                             );
+                            if (this.data.empresa != null)
+                              this.listUsuario = this.listUsuario.filter(
+                                (data: any) =>
+                                  data.idEmpresa == this.data.empresa
+                              );
                             setTimeout(
                               () =>
                                 this.loadingService.ChangeStatusLoading(false),
