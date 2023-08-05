@@ -15,12 +15,15 @@ import { UsersFormComponent } from '../../users/users-form/users-form.component'
 })
 export class CompaniesFormComponent implements OnInit {
   public form: FormGroup;
+  public formUser: FormGroup;
   public option: string;
   estadosList: any;
   listUsuario: any;
   listMinisterios: any;
   listDocs: any;
   listTipoEmpresa: any;
+  listEmpresas: any;
+  listPaises: any;
   id: number | undefined;
   type: number = this.data.type;
   table: number = this.data.table;
@@ -45,11 +48,27 @@ export class CompaniesFormComponent implements OnInit {
       Observacion: '',
       IdMinisterio: ['', Validators.required],
       IdEstado: ['', Validators.required],
-      IdUsuario: this.data.user != undefined ? this.data.user : '',
+      IdUsuario: 1,
+      Usuario: null,
+    });
+    this.formUser = this.formBuilder.group({
+      IdTypeDocument: ['', Validators.required],
+      Document: ['', Validators.required],
+      IdCountry: ['', Validators.required],
+      IdCompany: '',
+      Names: ['', Validators.required],
+      Surnames: ['', Validators.required],
+      IdRol: environment.adminitradorEmpRole,
+      Password: ['', Validators.required],
+      PhoneNumber: '',
+      Email: ['', Validators.required],
+      IdEstado:  environment.inactivoEstado,
     });
   }
   onSave() {
     this.loadingService.ChangeStatusLoading(true);
+    this.form.value.Usuario =
+      this.form.value.IdUsuario == '0' ? this.formUser.value : null;
     this.genericService
       .Post('empresas/RegistrarEmpresa', this.form.value)
       .subscribe({
@@ -78,7 +97,6 @@ export class CompaniesFormComponent implements OnInit {
         },
       });
   }
-
   getListas() {
     this.loadingService.ChangeStatusLoading(true);
     this.genericService
@@ -98,22 +116,39 @@ export class CompaniesFormComponent implements OnInit {
                   .subscribe((data: any) => {
                     this.estadosList = data;
                     this.genericService
-                      .GetAll('usuario/ConsultarUsuarios')
+                      .GetAll('empresas/ConsultarEmpresas')
                       .subscribe((data: any) => {
-                        console.log(this.data.table);
-                        this.listUsuario = data.filter(
-                          (data: any) =>
-                            data.idRol ==
-                            (this.data.table == 0
-                              ? environment.adminitradorEmpRole
-                              : this.data.table == 1
-                              ? environment.psicologoRole
-                              : environment.trabajadorRole)
-                        );
-                        setTimeout(
-                          () => this.loadingService.ChangeStatusLoading(false),
-                          500
-                        );
+                        this.listEmpresas = data;
+                        this.genericService
+                          .GetAll('pais/ConsultarPaises')
+                          .subscribe((data: any) => {
+                            this.listPaises = data;
+                            this.genericService
+                              .GetAll('roles/ConsultarRoles')
+                              .subscribe((data: any) => {
+                                this.listRoles = data;
+                                this.genericService
+                                  .GetAll('usuario/ConsultarUsuarios')
+                                  .subscribe((data: any) => {
+                                    this.listUsuario = data.filter(
+                                      (data: any) =>
+                                        data.idRol ==
+                                        (this.data.table == 0
+                                          ? environment.adminitradorEmpRole
+                                          : this.data.table == 1
+                                          ? environment.psicologoRole
+                                          : environment.trabajadorRole)
+                                    );
+                                    setTimeout(
+                                      () =>
+                                        this.loadingService.ChangeStatusLoading(
+                                          false
+                                        ),
+                                      500
+                                    );
+                                  });
+                              });
+                          });
                       });
                   });
               });

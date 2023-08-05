@@ -16,7 +16,6 @@ export class CardCarouselComponent implements OnInit {
   }
   LoadData() {
     this.genericService.GetAll('Rooms').subscribe(data => {
-      console.log(data);
       this.rooms = data.data;
     });
   }

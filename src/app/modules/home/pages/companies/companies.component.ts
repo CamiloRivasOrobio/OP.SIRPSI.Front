@@ -99,7 +99,6 @@ export class CompaniesComponent implements OnInit {
     estado: number = 1,
     role: number = 1
   ) {
-    console.log(item);
     const dialogRef = this.dialog.open(UsersFormComponent, {
       data: {
         id: 0,
@@ -118,7 +117,6 @@ export class CompaniesComponent implements OnInit {
   }
   SelectReservation(item: any) {
     this.nameEmpresa = item;
-    console.log(item);
     this.genericService
       .GetAll(
         'centrotrabajo/ConsultarCentroDeTrabajo?PageNumber=1&PageSize=100000&companie=' +
@@ -130,7 +128,6 @@ export class CompaniesComponent implements OnInit {
   }
   SelectCentroTrabajo(item: any) {
     this.nameWorkCenter = item;
-    console.log(item);
     this.genericService
       .GetAll(
         'userWorkPlace/ConsultarUsuariosCentroDeTrabajo?workCenter=' + item.id

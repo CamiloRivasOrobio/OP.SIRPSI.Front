@@ -43,7 +43,7 @@ export class UsersFormComponent implements OnInit {
       IdTypeDocument: ['', Validators.required],
       Document: ['', Validators.required],
       IdCountry: ['', Validators.required],
-      IdCompany: '',
+      IdCompany: this.data.empresa,
       Names: ['', Validators.required],
       Surnames: ['', Validators.required],
       IdRol:
@@ -164,6 +164,7 @@ export class UsersFormComponent implements OnInit {
           estado: this.data.estado,
           role: this.data.role,
           retornarModal: this.data.retornarModal,
+          empresa: this.data.empresa,
         },
       })
       .afterClosed()
@@ -218,7 +219,6 @@ export class UsersFormComponent implements OnInit {
         });
     } else if (this.table == 2) {
       var centroTrabajo = this.data.item;
-      console.log(this.data.item);
       // centroTrabajo.IdUsuario = this.formEmpresa.value.Usuario;
       // this.genericService
       //   .Put('centrotrabajo/ActualizarCentroDeTrabajo', centroTrabajo)

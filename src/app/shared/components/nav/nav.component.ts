@@ -33,6 +33,10 @@ export class NavComponent implements OnInit {
           this.accountService.userData.rutasAsignadas.filter(
             (ruta: any) => ruta.ruta == 'users'
           ).length > 0,
+        UsersList:
+          this.accountService.userData.rutasAsignadas.filter(
+            (ruta: any) => ruta.ruta == 'list-users'
+          ).length > 0,
         UsersCompany:
           this.accountService.userData.rutasAsignadas.filter(
             (ruta: any) => ruta.ruta == 'users-company'
@@ -68,6 +72,10 @@ export class NavComponent implements OnInit {
         Companies:
           this.accountService.userData.rutasAsignadas.filter(
             (ruta: any) => ruta.ruta == 'companies'
+          ).length > 0,
+        CompaniesList:
+          this.accountService.userData.rutasAsignadas.filter(
+            (ruta: any) => ruta.ruta == 'list-companies'
           ).length > 0,
         CompaniesUser:
           this.accountService.userData.rutasAsignadas.filter(

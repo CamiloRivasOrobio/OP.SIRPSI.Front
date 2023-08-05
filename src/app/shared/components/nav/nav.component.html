@@ -30,25 +30,26 @@
         <li *ngIf="true">
           <a class="item-menu" href="dashboard">Inicio</a>
         </li>
-        <li class="item-menu" *ngIf="this.menuSettings.Users || this.menuSettings.UsersCompany">
+        <li class="item-menu" *ngIf="this.menuSettings.Users">
           <a class="item-menu">Usuarios
             <i class="fa-sharp fa-solid fa-caret-down" style="float: right;"></i>
           </a>
           <ul class="children">
-            <li *ngIf="this.menuSettings.Users"><a href="users" class="item-sub-menu">Usuarios <span
+            <li *ngIf="this.menuSettings.UsersList"><a href="users/list-users" class="item-sub-menu">Usuarios <span
                   class="icon-dot"></span></a></li>
             <li *ngIf="this.menuSettings.UsersCompany"><a href="users/users-company" class="item-sub-menu">Usuarios por
                 compañia
                 <span class="icon-dot"></span></a></li>
           </ul>
         </li>
-        <li class="item-menu" *ngIf="this.menuSettings.Companies || this.menuSettings.WorkCenters">
+        <li class="item-menu" *ngIf="this.menuSettings.Companies">
           <a class="item-menu">Empresas
             <i class="fa-sharp fa-solid fa-caret-down" style="float: right;"></i>
           </a>
           <ul class="children">
-            <li *ngIf="this.menuSettings.Companies"><a href="companies" class="item-sub-menu">Listado de empresas <span
-                  class="icon-dot"></span></a></li>
+            <li *ngIf="this.menuSettings.CompaniesList"><a href="companies/list-companies" class="item-sub-menu">Listado
+                de
+                empresas <span class="icon-dot"></span></a></li>
             <li *ngIf="this.menuSettings.CompaniesUser"><a href="companies/companies-user"
                 class="item-sub-menu">Empresa<span class="icon-dot"></span></a></li>
             <li *ngIf="this.menuSettings.WorkCenters"><a href="work-centers" class="item-sub-menu">Centros de trabajos
