@@ -193,7 +193,7 @@
 <div mat-dialog-actions>
     <button mat-button mat-dialog-close>Cancelar</button>
     <button mat-button (click)="onSave()" cdkFocusInitial [disabled]="this.form.invalid"
-        *ngIf="this.form.value.IdUsuario != '0'">Registrar</button>
+        *ngIf="this.form.value.IdUsuario != '0'">Registrar.</button>
     <button mat-button (click)="onSave()" cdkFocusInitial [disabled]="this.form.invalid && this.formUser.invalid"
         *ngIf="this.form.value.IdUsuario == '0'">Registrar</button>
 </div>
