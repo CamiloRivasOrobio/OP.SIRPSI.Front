@@ -25,14 +25,14 @@ export class CompaniesUserComponent implements OnInit {
   public nameEmpresa: any;
   public nameWorkCenter: any;
   public columns = [
-    { name: 'Tipo documento', data: 'tipoDocNombre' },
+    { name: 'Tipo documento', data: 'tipoDocumento', property: 'nombre' },
     { name: 'Documento', data: 'documento' },
     { name: 'Digito verificación', data: 'digitoVerificacion' },
-    { name: 'Tipo empresa', data: 'tipoEmpNombre' },
+    { name: 'Tipo empresa', data: 'tipoEmpresa', property: 'nombre' },
     { name: 'Nombre', data: 'nombre' },
-    { name: 'Ministerio', data: 'ministerioNombre' },
-    { name: 'Administrador', data: 'usuario', property: 'names' },
-    { name: 'Estado', data: 'estadoNombre' },
+    { name: 'Ministerio', data: 'ministerio', property: 'nombre' },
+    // { name: 'Administrador', data: 'usuario', property: 'names' },
+    { name: 'Estado', data: 'estado', property: 'nombre' },
   ];
   public options = [
     {

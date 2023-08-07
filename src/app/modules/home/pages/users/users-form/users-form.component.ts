@@ -51,7 +51,9 @@ export class UsersFormComponent implements OnInit {
           ? ['', Validators.required]
           : this.data.role == 1
           ? environment.adminitradorEmpRole
-          : environment.psicologoRole,
+          : this.data.role == 2
+          ? environment.psicologoRole
+          : environment.trabajadorRole,
       Password: ['', Validators.required],
       PhoneNumber: '',
       Email: ['', Validators.required],
@@ -73,17 +75,19 @@ export class UsersFormComponent implements OnInit {
       next: (data) => {
         if (this.data.reload) '';
         else this.dialogRef.close();
-        if (data.estadoId == environment.inactivoEstado)
-          this.sendNotifications(
-            data.user.codeActivation,
-            data.user.phoneNumber
-          );
         Swal.fire({
           icon: 'success',
           title: 'Usuario Registrado, exitosamente.',
           showConfirmButton: false,
           timer: 1500,
-        }).then(() => this.returnViewOrReload(data.user.id));
+        }).then(() => {
+          if (data.estadoId == environment.inactivoEstado)
+            this.sendNotifications(
+              data.user.codeActivation,
+              data.user.phoneNumber
+            );
+          this.returnViewOrReload(data.user.id);
+        });
       },
       error: (error) => {
         this.loadingService.ChangeStatusLoading(false);
@@ -218,29 +222,31 @@ export class UsersFormComponent implements OnInit {
           },
         });
     } else if (this.table == 2) {
-      var centroTrabajo = this.data.item;
-      // centroTrabajo.IdUsuario = this.formEmpresa.value.Usuario;
-      // this.genericService
-      //   .Put('centrotrabajo/ActualizarCentroDeTrabajo', centroTrabajo)
-      //   .subscribe({
-      //     next: (data) => {
-      //       this.dialogRef.close();
-      //       Swal.fire({
-      //         icon: 'success',
-      //         title: 'Usuario asignado exitosamente.',
-      //         showConfirmButton: false,
-      //         timer: 1500,
-      //       }).then(() => window.location.reload());
-      //     },
-      //     error: (error) => {
-      //       Swal.fire({
-      //         icon: 'warning',
-      //         title: 'Ha ocurrido un error! ' + error.error.message,
-      //         showConfirmButton: false,
-      //         timer: 1500,
-      //       });
-      //     },
-      //   });
+      var body = {
+        Workplace: this.data.item.id,
+        User: this.formEmpresa.value.Usuario,
+      };
+      this.genericService
+        .Post('userWorkPlace/RegistrarCentroDeTrabajoUsuario', body)
+        .subscribe({
+          next: (data) => {
+            this.dialogRef.close();
+            Swal.fire({
+              icon: 'success',
+              title: 'Usuario asignado exitosamente.',
+              showConfirmButton: false,
+              timer: 1500,
+            }).then(() => window.location.reload());
+          },
+          error: (error) => {
+            Swal.fire({
+              icon: 'warning',
+              title: 'Ha ocurrido un error! ' + error.error.message,
+              showConfirmButton: false,
+              timer: 1500,
+            });
+          },
+        });
     }
   }
   sendNotifications(code: string, numberPhone: string) {
@@ -256,6 +262,7 @@ export class UsersFormComponent implements OnInit {
   }
   returnViewOrReload(id: string) {
     this.loadingService.ChangeStatusLoading(false);
+    if (this.data.retornarModal == environment.retornarModal.registrarTrabajador) window.location.reload();
     if (this.data.retornarModal == undefined) window.location.reload();
     if (this.data.retornarModal == environment.retornarModal.registrarAdmin) {
       this.dialogRef.close();
