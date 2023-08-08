@@ -14,6 +14,7 @@ import Swal from 'sweetalert2';
 import { RegisterRequest } from 'src/app/core/models/users/register-request';
 import { MenuProperties } from 'src/app/core/models/menu-properties';
 import { SelectRoleService } from './select-role.service';
+import { LoadingService } from './loading.service';
 
 @Injectable({
   providedIn: 'root',
@@ -28,7 +29,8 @@ export class AccountService {
   constructor(
     private http: HttpClient,
     public router: Router,
-    private roleService: SelectRoleService
+    private roleService: SelectRoleService,
+    private loadingService: LoadingService
   ) {
     var session =
       sessionStorage['user'] == undefined
@@ -92,11 +94,16 @@ export class AccountService {
   }
 
   public CloseUserSession() {
+    // this.loadingService.ChangeStatusLoading(true);
     sessionStorage.removeItem('user');
     this.userSubject.next(null);
     this.roleService.SelectRoleUser(false);
-    this.ValidateSesion();
-    window.location.reload();
+    // setInterval(() => {
+    //   this.loadingService.ChangeStatusLoading(false);
+    // }, 1000);
+    this.router.navigate(['/welcome']);
+    // this.ValidateSesion();
+    // window.location.reload();
   }
 
   public ValidateSesion(type: number = 0) {
