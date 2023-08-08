@@ -19,6 +19,8 @@ export class UsersFormComponent implements OnInit {
   public option: string;
   public listCentrosCosto: any;
   public viewStatus: boolean = true;
+  public title: string =
+    this.data.title == undefined ? 'Usuarios' : this.data.title;
   estadosList: any;
   listUsuario: any;
   listEmpresas: any;

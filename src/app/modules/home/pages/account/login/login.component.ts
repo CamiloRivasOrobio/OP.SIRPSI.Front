@@ -40,13 +40,13 @@ export class LoginComponent implements OnInit {
       this.loadingService.ChangeStatusLoading(true);
       this.accountService.Authenticate(this.form.value).subscribe(
         (result: any) => {
-          setTimeout(() => this.loadingService.ChangeStatusLoading(false), 800);
+          setTimeout(() => this.loadingService.ChangeStatusLoading(false), 500);
         },
         (error) => {
           console.log(error.error);
           Swal.fire('Error', error.error.message, 'error');
           this.openSnackBar(error.error.message);
-          setTimeout(() => this.loadingService.ChangeStatusLoading(false), 800);
+          setTimeout(() => this.loadingService.ChangeStatusLoading(false), 500);
         }
       );
     } else {

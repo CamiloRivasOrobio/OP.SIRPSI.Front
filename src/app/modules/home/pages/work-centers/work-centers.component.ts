@@ -100,6 +100,7 @@ export class WorkCentersComponent implements OnInit {
               role: role,
               retornarModal: environment.retornarModal.registrarTrabajador,
               empresa: type != 0 ? item.idEmpresa : item.id,
+              title: 'Ficha de Datos Generales'
             },
           });
           dialogRef.afterClosed().subscribe();
