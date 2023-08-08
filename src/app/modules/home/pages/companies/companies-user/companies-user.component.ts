@@ -130,7 +130,7 @@ export class CompaniesUserComponent implements OnInit {
               table: table,
               estado: estado,
               role: role,
-              retornarModal: environment.retornarModal.asignarPsicologo,
+              retornarModal: environment.retornarModal.registrarTrabajador,
               empresa: table != 0 ? item.idEmpresa : item.id,
               centroTrabajo: null,
             },
