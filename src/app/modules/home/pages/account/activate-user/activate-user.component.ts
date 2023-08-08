@@ -31,8 +31,8 @@ export class ActivateUserComponent implements OnInit {
     this.loadingService.ChangeStatusLoading(true);
     this.accountService.ActivateUser(this.form.value).subscribe(
       (result: any) => {
+        setTimeout(() => this.loadingService.ChangeStatusLoading(false), 400);
         this.openSnackBar(result.message);
-        setTimeout(() => this.loadingService.ChangeStatusLoading(false), 800);
       },
       (error) => {
         console.error(error.error);

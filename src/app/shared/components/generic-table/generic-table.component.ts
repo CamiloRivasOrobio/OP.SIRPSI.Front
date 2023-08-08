@@ -41,7 +41,7 @@ export class GenericTableComponent implements OnInit {
     this.loadingService.ChangeStatusLoading(true);
     if (this.dataTable == undefined) this.Get();
     if (this.dataTable.length >= 0) {
-      setTimeout(() => this.loadingService.ChangeStatusLoading(false), 1200);
+      setTimeout(() => this.loadingService.ChangeStatusLoading(false), 600);
     }
     // this.loadingService.ChangeStatusLoading()
   }
@@ -69,7 +69,7 @@ export class GenericTableComponent implements OnInit {
           this.totalItems = data.totalItems;
           setTimeout(
             () => this.loadingService.ChangeStatusLoading(false),
-            1200
+            600
           );
         },
         (error) => {
@@ -77,7 +77,7 @@ export class GenericTableComponent implements OnInit {
           this.openSnackBar(error.error.message);
           setTimeout(
             () => this.loadingService.ChangeStatusLoading(false),
-            1200
+            600
           );
         }
       );
@@ -98,7 +98,7 @@ export class GenericTableComponent implements OnInit {
             this.openSnackBar(data.message);
             setTimeout(
               () => this.loadingService.ChangeStatusLoading(false),
-              1200
+              600
             );
             if (this.dataTable == undefined) this.Get();
             else window.location.reload();
@@ -121,7 +121,7 @@ export class GenericTableComponent implements OnInit {
     if (type == 2) this.edit.emit(item);
     if (type == 3) this.pdf.emit(item);
     if (type == 4) this.assign.emit(item);
-    setTimeout(() => this.loadingService.ChangeStatusLoading(false), 1200);
+    setTimeout(() => this.loadingService.ChangeStatusLoading(false), 600);
   }
   SeletedItem(item: any, estado: any, validationSelect: boolean | any) {
     this.loadingService.ChangeStatusLoading(true);
@@ -129,7 +129,7 @@ export class GenericTableComponent implements OnInit {
     this.selected.emit(item);
     // else
     //   this.openSnackBar("El registro con la id: " + id + " esta deshabilitado.");
-    setTimeout(() => this.loadingService.ChangeStatusLoading(false), 1200);
+    setTimeout(() => this.loadingService.ChangeStatusLoading(false), 600);
   }
   openSnackBar(message: string) {
     this.snackBar.open(message, 'x', {

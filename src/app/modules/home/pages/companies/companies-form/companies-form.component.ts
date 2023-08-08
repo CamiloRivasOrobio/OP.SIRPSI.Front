@@ -47,7 +47,10 @@ export class CompaniesFormComponent implements OnInit {
       Descripcion: ['', Validators.required],
       Observacion: '',
       IdMinisterio: ['', Validators.required],
-      IdEstado: ['', Validators.required],
+      IdEstado:
+        this.data.estado == undefined
+          ? ['', Validators.required]
+          : this.data.estado,
       IdUsuario: 1,
       Usuario: null,
     });
@@ -62,7 +65,7 @@ export class CompaniesFormComponent implements OnInit {
       Password: ['', Validators.required],
       PhoneNumber: '',
       Email: ['', Validators.required],
-      IdEstado:  environment.inactivoEstado,
+      IdEstado: environment.inactivoEstado,
     });
   }
   onSave() {
@@ -75,11 +78,12 @@ export class CompaniesFormComponent implements OnInit {
         next: (data) => {
           if (this.data.reload) '';
           else this.dialogRef.close();
+          this.loadingService.ChangeStatusLoading(false);
           Swal.fire({
             icon: 'success',
             title: 'Empresa, Registrado, exitosamente.',
             showConfirmButton: false,
-            timer: 1500,
+            timer: 2800,
           }).then(() => window.location.reload());
         },
         error: (error) => {
@@ -92,7 +96,7 @@ export class CompaniesFormComponent implements OnInit {
                 ? 'Registro de usuario ¡fallido!  Error: La contraseña no cumple los criterios de seguridad.'
                 : error.error.message,
             showConfirmButton: false,
-            timer: 1500,
+            timer: 2800,
           });
         },
       });
@@ -103,6 +107,7 @@ export class CompaniesFormComponent implements OnInit {
       .GetAll('ministerio/ConsultarMinisterio')
       .subscribe((data: any) => {
         this.listMinisterios = data;
+        this.form.controls['IdMinisterio'].setValue(this.listMinisterios[0].id);
         this.genericService
           .GetAll('tipodocumento/ConsultarTipoDocumento')
           .subscribe((data: any) => {

@@ -49,7 +49,7 @@ export class RoutesRoleComponent {
       )
       .subscribe((data: any) => {
         this.LoadLists();
-        // setTimeout(() => this.loadingService.ChangeStatusLoading(false), 500);
+        setTimeout(() => this.loadingService.ChangeStatusLoading(false), 500);
         this.openSnackBar(
           event.checked
             ? 'Se ha asignado correctamente'
@@ -63,7 +63,7 @@ export class RoutesRoleComponent {
       verticalPosition: 'bottom',
     });
   }
-  AssignPermissions(item: any){
+  AssignPermissions(item: any) {
     console.log(item);
   }
 }

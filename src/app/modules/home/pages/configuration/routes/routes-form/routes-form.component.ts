@@ -42,11 +42,12 @@ export class RoutesFormComponent implements OnInit {
       .subscribe({
         next: (data) => {
           this.dialogRef.close();
+          setTimeout(() => this.loadingService.ChangeStatusLoading(false), 400);
           Swal.fire({
             icon: 'success',
             title: 'Role Registrado, exitosamente.',
             showConfirmButton: false,
-            timer: 1500,
+            timer: 2800,
           }).then(() => window.location.reload());
         },
         error: (error) => {
@@ -56,7 +57,7 @@ export class RoutesFormComponent implements OnInit {
             icon: 'warning',
             title: 'Ha ocurrido un error! ' + error.error.message,
             showConfirmButton: false,
-            timer: 1500,
+            timer: 2800,
           });
         },
       });

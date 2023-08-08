@@ -6,7 +6,7 @@
         </div>
         <div class="col-md-5 space">
             <a type="button" style="width: 100%; margin-bottom: 10px;" class="btn btn-dark"
-                (click)="onAssignAdmin($event, 1, 2, 2, 0)">
+                (click)="onAssignAdmin(this.accountService.userData.empresa, 1, 2, 2, 0)">
                 Registrar Psicólogo Especialista SST
                 <i class="fa-solid fa-tower-control"></i>
             </a>

@@ -5,6 +5,7 @@ import { AccountService } from 'src/app/shared/services/account.service';
 import { LoadingService } from 'src/app/shared/services/loading.service';
 import { CompaniesFormComponent } from '../companies/companies-form/companies-form.component';
 import Swal from 'sweetalert2';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-welcome',
@@ -50,7 +51,15 @@ export class WelcomeComponent implements OnInit {
     }).then((result) => {
       if (result.isConfirmed) {
         const dialogRef = this.dialog.open(CompaniesFormComponent, {
-          data: { id: 0, type: 0, reload: true, table: 0 },
+          data: {
+            id: 0,
+            type: 0,
+            reload: true,
+            table: 0,
+            estado: environment.activoEstado,
+            role: 2,
+            retornarModal: environment.retornarModal.registrarAdmin,
+          },
         });
         dialogRef.afterClosed().subscribe();
       }

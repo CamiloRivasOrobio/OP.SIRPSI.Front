@@ -75,17 +75,18 @@ export class UsersFormComponent implements OnInit {
       next: (data) => {
         if (this.data.reload) '';
         else this.dialogRef.close();
+        if (data.estadoId == environment.inactivoEstado)
+          this.sendNotifications(
+            data.user.codeActivation,
+            data.user.phoneNumber
+          );
+        this.loadingService.ChangeStatusLoading(false);
         Swal.fire({
           icon: 'success',
           title: 'Usuario Registrado, exitosamente.',
           showConfirmButton: false,
-          timer: 1500,
+          timer: 2800,
         }).then(() => {
-          if (data.estadoId == environment.inactivoEstado)
-            this.sendNotifications(
-              data.user.codeActivation,
-              data.user.phoneNumber
-            );
           this.returnViewOrReload(data.user.id);
         });
       },
@@ -99,7 +100,7 @@ export class UsersFormComponent implements OnInit {
               ? 'Registro de usuario ¡fallido!  Error: La contraseña no cumple los criterios de seguridad.'
               : error.error.message,
           showConfirmButton: false,
-          timer: 1500,
+          timer: 2800,
         });
       },
     });
@@ -147,7 +148,7 @@ export class UsersFormComponent implements OnInit {
                             setTimeout(
                               () =>
                                 this.loadingService.ChangeStatusLoading(false),
-                              1200
+                              600
                             );
                           });
                       });
@@ -185,7 +186,7 @@ export class UsersFormComponent implements OnInit {
             icon: 'success',
             title: 'Usuario asignado exitosamente.',
             showConfirmButton: false,
-            timer: 1500,
+            timer: 2800,
           }).then(() => window.location.reload());
         },
         error: (error) => {
@@ -193,7 +194,7 @@ export class UsersFormComponent implements OnInit {
             icon: 'warning',
             title: 'Ha ocurrido un error! ' + error.error.message,
             showConfirmButton: false,
-            timer: 1500,
+            timer: 2800,
           });
         },
       });
@@ -209,7 +210,7 @@ export class UsersFormComponent implements OnInit {
               icon: 'success',
               title: 'Usuario asignado exitosamente.',
               showConfirmButton: false,
-              timer: 1500,
+              timer: 2800,
             }).then(() => window.location.reload());
           },
           error: (error) => {
@@ -217,7 +218,7 @@ export class UsersFormComponent implements OnInit {
               icon: 'warning',
               title: 'Ha ocurrido un error! ' + error.error.message,
               showConfirmButton: false,
-              timer: 1500,
+              timer: 2800,
             });
           },
         });
@@ -235,7 +236,7 @@ export class UsersFormComponent implements OnInit {
               icon: 'success',
               title: 'Usuario asignado exitosamente.',
               showConfirmButton: false,
-              timer: 1500,
+              timer: 2800,
             }).then(() => window.location.reload());
           },
           error: (error) => {
@@ -243,7 +244,7 @@ export class UsersFormComponent implements OnInit {
               icon: 'warning',
               title: 'Ha ocurrido un error! ' + error.error.message,
               showConfirmButton: false,
-              timer: 1500,
+              timer: 2800,
             });
           },
         });
@@ -262,7 +263,10 @@ export class UsersFormComponent implements OnInit {
   }
   returnViewOrReload(id: string) {
     this.loadingService.ChangeStatusLoading(false);
-    if (this.data.retornarModal == environment.retornarModal.registrarTrabajador) window.location.reload();
+    if (
+      this.data.retornarModal == environment.retornarModal.registrarTrabajador
+    )
+      window.location.reload();
     if (this.data.retornarModal == undefined) window.location.reload();
     if (this.data.retornarModal == environment.retornarModal.registrarAdmin) {
       this.dialogRef.close();

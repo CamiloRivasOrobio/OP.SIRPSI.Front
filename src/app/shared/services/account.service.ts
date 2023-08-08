@@ -84,7 +84,7 @@ export class AccountService {
       icon: 'success',
       title: 'Se ha iniciado sesión correctamente.',
       showConfirmButton: false,
-      timer: 1500,
+      timer: 2800,
     }).then(() => {
       this.ValidateSesion(1);
       window.location.reload();

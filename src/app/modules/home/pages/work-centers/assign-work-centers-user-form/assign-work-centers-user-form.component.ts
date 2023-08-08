@@ -41,6 +41,7 @@ export class AssignWorkCentersUserFormComponent implements OnInit {
       .Post('userWorkPlace/RegistrarCentroDeTrabajoUsuario', this.form.value)
       .subscribe({
         next: (data) => {
+          setTimeout(() => this.loadingService.ChangeStatusLoading(false), 400);
           window.location.reload();
           this.toastr.success('Usuario Registrado, exitosamente!');
         },

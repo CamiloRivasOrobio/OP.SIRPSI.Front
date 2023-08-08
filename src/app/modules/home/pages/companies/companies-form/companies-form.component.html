@@ -50,30 +50,10 @@
         </div>
         <div class="col-md-6">
             <mat-form-field appearance="outline">
-                <mat-label>Ministerio: </mat-label>
-                <mat-select id="IdMinisterio" #IdMinisterio formControlName="IdMinisterio">
-                    <mat-option [value]="tiposDocs.id" *ngFor="let tiposDocs of listMinisterios; let i = index">
-                        {{tiposDocs.nombre}}
-                    </mat-option>
-                </mat-select>
-            </mat-form-field>
-        </div>
-        <div class="col-md-6">
-            <mat-form-field appearance="outline">
                 <mat-label>Tipo de empresa: </mat-label>
                 <mat-select id="IdTipoEmpresa" #IdTipoEmpresa formControlName="IdTipoEmpresa">
                     <mat-option [value]="tiposDocs.id" *ngFor="let tiposDocs of listTipoEmpresa; let i = index">
                         {{tiposDocs.nombre}}
-                    </mat-option>
-                </mat-select>
-            </mat-form-field>
-        </div>
-        <div class="col-md-6">
-            <mat-form-field appearance="outline">
-                <mat-label>Estado: </mat-label>
-                <mat-select id="IdEstado" #IdEstado formControlName="IdEstado">
-                    <mat-option [value]="estado.id" *ngFor="let estado of estadosList; let i = index">
-                        {{estado.nombre}}
                     </mat-option>
                 </mat-select>
             </mat-form-field>
@@ -87,6 +67,26 @@
                     </mat-option>
                     <mat-option [value]="'0'">
                         Registrar usuario
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div class="col-md-6" [ngStyle]="{'display': (this.data.estado == undefined ? 'block' : 'none')}">
+            <mat-form-field appearance="outline">
+                <mat-label>Estado: </mat-label>
+                <mat-select id="IdEstado" #IdEstado formControlName="IdEstado">
+                    <mat-option [value]="estado.id" *ngFor="let estado of estadosList; let i = index">
+                        {{estado.nombre}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div class="col-md-6">
+            <mat-form-field appearance="outline" [ngStyle]="{'display': 'none'}">
+                <mat-label>Ministerio: </mat-label>
+                <mat-select id="IdMinisterio" #IdMinisterio formControlName="IdMinisterio">
+                    <mat-option [value]="tiposDocs.id" *ngFor="let tiposDocs of listMinisterios; let i = index">
+                        {{tiposDocs.nombre}}
                     </mat-option>
                 </mat-select>
             </mat-form-field>
