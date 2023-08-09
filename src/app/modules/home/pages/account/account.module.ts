@@ -8,9 +8,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
-import {MatIconModule} from '@angular/material/icon';
+import { MatIconModule } from '@angular/material/icon';
 import { MatDividerModule } from '@angular/material/divider';
-import {MatCheckboxModule} from '@angular/material/checkbox';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 import { RestorePasswordComponent } from './restore-password/restore-password.component';
 import { SelectRoleComponent } from './select-role/select-role.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
@@ -43,6 +43,6 @@ import { ActivateUserComponent } from './activate-user/activate-user.component';
     TermsConditionsModule,
     NgxCaptchaModule,
     MatTooltipModule,
-  ]
+  ],
 })
-export class AccountModule { }
+export class AccountModule {}

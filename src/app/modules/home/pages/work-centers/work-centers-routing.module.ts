@@ -4,7 +4,8 @@ import { WorkCentersComponent } from './work-centers.component';
 import { AuthGuard } from 'src/app/core/security/auth.guard';
 
 const routes: Routes = [
-  { path: '', component: WorkCentersComponent, canActivate: [AuthGuard] },
+  // { path: '', component: WorkCentersComponent, canActivate: [AuthGuard] },
+  { path: '', component: WorkCentersComponent },
 ];
 
 @NgModule({
