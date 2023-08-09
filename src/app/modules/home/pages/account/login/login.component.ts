@@ -26,7 +26,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     this.form = this.formBuilder.group({
-      IdCompany: ['346789', Validators.required],
+      IdCompany: ['103365981', Validators.required],
       Document: ['1234567', Validators.required],
       Password: ['Admin123*.', Validators.required],
       ReCaptcha: ['', Validators.required],

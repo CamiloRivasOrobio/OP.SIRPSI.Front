@@ -10,7 +10,11 @@ const routes: Routes = [
   { path: '', redirectTo: 'routes', pathMatch: 'full' },
   { path: 'roles', component: RolesComponent, canActivate: [AuthGuard] },
   { path: 'routes', component: RoutesComponent, canActivate: [AuthGuard] },
-  { path: 'variables', component: ConfigurationVariablesComponent },
+  {
+    path: 'variables',
+    component: ConfigurationVariablesComponent,
+    canActivate: [AuthGuard],
+  },
   {
     path: 'routes-role',
     component: RoutesRoleComponent,

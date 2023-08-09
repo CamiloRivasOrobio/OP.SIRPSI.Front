@@ -94,13 +94,13 @@ export class AccountService {
   }
 
   public CloseUserSession() {
-    // this.loadingService.ChangeStatusLoading(true);
+    this.loadingService.ChangeStatusLoading(true);
     sessionStorage.removeItem('user');
     this.userSubject.next(null);
     this.roleService.SelectRoleUser(false);
-    // setInterval(() => {
-    //   this.loadingService.ChangeStatusLoading(false);
-    // }, 1000);
+    setInterval(() => {
+      this.loadingService.ChangeStatusLoading(false);
+    }, 1000);
     this.router.navigate(['/welcome']);
     // this.ValidateSesion();
     // window.location.reload();
